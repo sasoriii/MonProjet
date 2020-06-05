@@ -124,13 +124,13 @@ function getTotalOrder($orderId)
     $total = 0;
     $lines = getLines($orderId);
 
-    foreach ($lines as $line)
-    {
+    foreach ($lines as $line) {
         $productPrice = getProductPrice($line['product_id']);
         $quantity = $line['quantity'];
         $totalLine = $productPrice * $quantity;
         $total = $total + $totalLine;
     }
+
     return $total;
 }
 
@@ -181,29 +181,38 @@ function getProfile($id)
     $requser = $pdo->prepare('SELECT * FROM espace_membre WHERE id = ?');
     $requser->execute(array($id));
     $userinfo = $requser->fetch();
-    return $userinfo;
 
-}
-
-function getConnect($mailconnect, $mdpconnect)
-{
-    $pdo = getConnection();
-    $requser = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ? AND motdepasse = ?");
-    $requser->execute(array($mailconnect, $mdpconnect));
-    $userexist = $requser->rowCount();
-    return $userexist;
-}
-
-function getInfoProfil($mailconnect, $mdpconnect)
-{
-    $pdo = getConnection();
-    $requser = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ? AND motdepasse = ?");
-    $requser->execute(array($mailconnect, $mdpconnect));
-    $userinfo = $requser->fetch();
     return $userinfo;
 }
 
-function isEmailAvailable($mail){
+function login($email, $password)
+{
+    $password = sha1($password);
+
+    $pdo = getConnection();
+    $request = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ? AND motdepasse = ?");
+    $request->execute(array($email, $password));
+    
+    $userInfo = $request->fetch();
+
+    if (! $userInfo) {
+        return false;
+    }
+
+    $_SESSION['id'] = $userinfo['id'];
+    $_SESSION['pseudo'] = $userinfo['pseudo'];
+    $_SESSION['mail'] = $userinfo['mail'];
+    
+    return true;
+}
+
+function getSessionUserId() 
+{
+    return isset($_SESSION['id']) ? $_SESSION['id'] : null;
+}
+
+function isEmailAvailable($mail)
+{
     $pdo = getConnection();
     $reqmail = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ?");
     $reqmail->execute(array($mail));
@@ -214,12 +223,15 @@ function isEmailAvailable($mail){
 function isPseudoValid($pseudo)
 {
     $pseudolength = strlen($pseudo);
-    if ($pseudolength == 0 ){
+
+    if ($pseudolength == 0 ) {
         return false;
     }
-    if ($pseudolength > 255){
+
+    if ($pseudolength > 255) {
         return false;
     }
+
     else return true;
 }
 

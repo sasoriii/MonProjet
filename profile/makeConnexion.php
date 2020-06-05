@@ -19,25 +19,9 @@ if(empty($_POST['mdpconnect']) )
     throw new Exception("pas de mdp");
 }
 
-if(!empty($mailconnect) AND !empty($mdpconnect))
-{
-    $userexist = getConnect($mailconnect, $mdpconnect);
-}
-else
-{
-    throw new Exception("missing form");
+if ( ! login($mailconnect, $mdpconnect)) {
+    throw new Exception("Login ou mot de passe incorrect");
 }
 
-if($userexist == 1)
-{
-    $userinfo = getInfoProfil($mailconnect, $mdpconnect);
+header("Location: profil.php?id=" . getUserId());
 
-    $_SESSION['id'] = $userinfo['id'];
-    $_SESSION['pseudo'] = $userinfo['pseudo'];
-    $_SESSION['mail'] = $userinfo['mail'];
-    header("Location: profil.php?id=".$_SESSION['id']);
-}
-else
-{
-    throw new Exception("missing form");
-}
