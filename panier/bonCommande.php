@@ -48,28 +48,27 @@ $orderId = $_GET['id'];
                         prix total
                     </td>
                 </tr>
-                <?php $monfichier = fopen('commande.csv', 'r+')?>
-                <?php foreach (getLines($orderId) as $line): ?>
-                <tr>
-                    <td style="border: 1px solid black">
-                        <?= $line['order_id']; fputs($monfichier, $line['order_id'])?>
-                    </td>
-                    <td style="border: 1px solid black">
-                        <?= $line['orderline_id']; fputs($monfichier, $line['orderline_id'])?>
-                    </td>
-                    <td style="border: 1px solid black">
-                        <?= getProductName($line['product_id']); fputs($monfichier, getProductName($line['product_id'])) ?>
-                    </td>
-                    <td style="border: 1px solid black">
-                        <?= $line['quantity']; fputs($monfichier, $line['quantity']) ?>
-                    </td>
-                    <td style="border: 1px solid black">
-                        <?= getProductPrice($line['product_id']); fputs($monfichier, getProductPrice($line['product_id']))?>
-                    </td>
-                <?php endforeach ?>
-                    <td style="border: 1px solid black">
-                    </td>
-                </tr>
+                    <?php foreach (getLines($orderId) as $line): ?>
+                    <tr>
+                        <td style="border: 1px solid black">
+                            <?= $line['order_id']?>
+                        </td>
+                        <td style="border: 1px solid black">
+                            <?= $line['orderline_id']?>
+                        </td>
+                        <td style="border: 1px solid black">
+                            <?= getProductName($line['product_id']) ?>
+                        </td>
+                        <td style="border: 1px solid black">
+                            <?= $line['quantity'] ?>
+                        </td>
+                        <td style="border: 1px solid black">
+                            <?= getProductPrice($line['product_id'])?>
+                        </td>
+                    <?php endforeach ?>
+                        <td style="border: 1px solid black">
+                        </td>
+                    </tr>
 
                 <tr>
                     <td style="border: 1px solid black">
@@ -83,10 +82,9 @@ $orderId = $_GET['id'];
                     <td style="border: 1px solid black">
                     </td>
                     <td style="border: 1px solid black">
-                        <?= getTotalOrder($orderId); fputs($monfichier, getTotalOrder($orderId))?>
+                        <?= getTotalOrder($orderId)?>
                     </td>
                 </tr>
-                <?php fclose($monfichier); ?>
             </table>
             <div>
                 <a href="commandes.php">

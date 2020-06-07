@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+function getShop()
+{
+   $bdd = getConnection();
+    $reponse = $bdd->query('SELECT * FROM product');
+    $donnees = $reponse->fetchAll();
+    return $donnees;
+}
+
 function addToCart(int $productId) {
     if ( ! isset($_SESSION['panier'])) {
         $_SESSION['panier'] = [];
@@ -199,16 +207,11 @@ function login($email, $password)
         return false;
     }
 
-    $_SESSION['id'] = $userinfo['id'];
-    $_SESSION['pseudo'] = $userinfo['pseudo'];
-    $_SESSION['mail'] = $userinfo['mail'];
+    $_SESSION['id'] = $userInfo['id'];
+    $_SESSION['pseudo'] = $userInfo['pseudo'];
+    $_SESSION['mail'] = $userInfo['mail'];
     
     return true;
-}
-
-function getSessionUserId() 
-{
-    return isset($_SESSION['id']) ? $_SESSION['id'] : null;
 }
 
 function isEmailAvailable($mail)
@@ -240,4 +243,9 @@ function createUser($pseudo, $mail, $mdp)
     $pdo = getConnection();
     $insertmbr = $pdo->prepare("INSERT INTO espace_membre(pseudo, mail, motdepasse) VALUES(?, ?, ?)");
     $insertmbr->execute(array($pseudo, $mail, $mdp));
+}
+
+function getUserId()
+{
+    return $_SESSION['id'];
 }

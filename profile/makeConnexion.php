@@ -2,7 +2,7 @@
 session_destroy();
 session_start();
 $mailconnect = htmlspecialchars($_POST['mailconnect']);
-$mdpconnect = sha1($_POST['mdpconnect']);
+$mdpconnect = $_POST['mdpconnect'];
 
 if(! isset($_POST['formconnexion']))
 {
