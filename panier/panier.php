@@ -38,14 +38,22 @@ require('../functions.php');
             <?php endif ?>
             <?php foreach (getCartLines() as $line): ?>
                 <tr>
-                    <td><?= getProductName($line['product_id']) ?></td>
-                    <td><?= $line['product_quantity'] ?></td>
-                    <td><?= getProductPrice($line['product_id'])?></td>
+                    <td>
+                        <?= getProductName($line['product_id']) ?>
+                    </td>
+                    <td>
+                        <?= $line['product_quantity'] ?>
+                    </td>
+                    <td>
+                        <?= getProductPrice($line['product_id'])?>
+                    </td>
                 </tr>
             <?php endforeach ?>
         </table>
         <div>
-            <a href="formulaire.php">Next </a>
+            <a href="formulaire.php">
+                Next
+            </a>
         </div>
 
         <div style="text-align: center;">

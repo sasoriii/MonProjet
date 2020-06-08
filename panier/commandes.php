@@ -38,10 +38,20 @@
                 <form name="redirection" method="post" action="">
                     <?php foreach (getOrders() as $line): ?>
                     <tr>
-                        <td style="border: 1px solid black"><?= $line['order_id']; ?> </td>
-                        <td style="border: 1px solid black"><?= countOrderLines($line['order_id']); ?></td>
-                        <td style="border: 1px solid black"><?= getTotalOrder($line['order_id'])?></td>
-                        <td style="border: 1px solid black" ><a href="bonCommande.php?id=<?= $line['order_id']?>">details</a></td>
+                        <td style="border: 1px solid black">
+                            <?= $line['order_id']; ?>
+                        </td>
+                        <td style="border: 1px solid black">
+                            <?= countOrderLines($line['order_id']); ?>
+                        </td>
+                        <td style="border: 1px solid black">
+                            <?= getTotalOrder($line['order_id'])?>
+                        </td>
+                        <td style="border: 1px solid black" >
+                            <a href="bonCommande.php?id=<?= $line['order_id']?>">
+                                details
+                            </a>
+                        </td>
                     <?php endforeach ?>
                         <td style="border: 1px solid black"> </td>
                      </tr>

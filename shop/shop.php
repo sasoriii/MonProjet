@@ -33,7 +33,9 @@
                 <strong> <?= $donnees['product_id']; ?> </strong> : <?= $donnees['product_name']; ?><br />
                 <?= '<a href="product.php"> <img src="/img/' . $donnees["product_img"] . '"></a>  '?>
                 Le prix est de <?= $donnees['product_price']; ?> euros !<br />
-                <a href="/panier/ajouter.php?product_id=<?= $donnees['product_id'] ?>">Ajouter au panier</a>
+                <a href="/panier/ajouter.php?product_id=<?= $donnees['product_id'] ?>">
+                    Ajouter au panier
+                </a>
             </p>
             </div>
             <?php }?>
