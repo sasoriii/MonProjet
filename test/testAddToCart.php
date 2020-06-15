@@ -1,4 +1,4 @@
-<?php require('../functions.php');
+<?php require('../bootstrap.php');
 
 addToCart(1);
 addToCart(3);

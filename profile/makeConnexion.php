@@ -1,4 +1,4 @@
-<?php require('../functions.php');
+<?php require('../bootstrap.php');
 session_destroy();
 session_start();
 $mailconnect = htmlspecialchars($_POST['mailconnect']);

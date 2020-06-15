@@ -1,4 +1,4 @@
-<?php require('../functions.php');
+<?php require('../bootstrap.php');
 
 $sql = "select * from `order`, `orderline` where order_id= orderline_id";
 

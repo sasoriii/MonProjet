@@ -1,3 +1,3 @@
-<?php require('../functions.php');
+<?php require('../bootstrap.php');
 
 createOrder();

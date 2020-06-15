@@ -1,4 +1,4 @@
-<?php require('../functions.php'); ?>
+<?php require('../bootstrap.php'); ?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>

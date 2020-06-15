@@ -1,4 +1,4 @@
-<?php require('../functions.php');
+<?php require('../bootstrap.php');
 
 $productId = $_GET['product_id'];
 

@@ -1,4 +1,4 @@
-<?php require('../functions.php');
+<?php require('../bootstrap.php');
 try
 {
     $pdo = new PDO('mysql:host=localhost;dbname=holywind_db;charset=utf8', 'holywindtest', 'holywindmdp');

@@ -1,22 +1,7 @@
-<?php require('functions.php');
-require 'carbon/vendor/autoload.php';
-?>
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>
-        Holywinmmmd
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
-    <link href="/css/header.css?<?= microtime() ?>" rel="stylesheet">
-    <link href="/css/footer.css?<?= microtime() ?>" rel="stylesheet">
-    <link href="/css/accueil.css? <?= microtime() ?>" rel="stylesheet">
-  </head>
+<?php require('bootstrap.php');?>
 
-  <body>
-  	<header>
+<body>
+    <header>
   		<?php include_once "css/header.php"; ?>
   	</header>
 
@@ -24,9 +9,6 @@ require 'carbon/vendor/autoload.php';
         <h1 class="text-center">
             Holywind
         </h1>
-        <?php use Carbon\Carbon;
-            printf("Now: %s", Carbon::now());
-        ?>
         <h3 class="text-center">
             Le kite shop de pornichet !
         </h3>
@@ -40,7 +22,4 @@ require 'carbon/vendor/autoload.php';
         <?php include_once "css/footer.php";?>
     </div>
 
-    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js">
-    </script>
-  </body>
-</html>
+
