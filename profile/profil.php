@@ -1,7 +1,10 @@
-<?php require('../bootstrap.php');
-    $pdo = getConnection();
-    $id = $_GET['id'];
-    $userinfo = getProfile($id);
+<?php
+require('../bootstrap.php');
+$pdo = getConnection();
+$id = $_GET['id'];
+$userinfo = getProfile($id);
+
+view(('profile_view.php', ['userinfo' => $userinfo]);
 ?>
 
 <?php include_once "../css/header.php"; ?>

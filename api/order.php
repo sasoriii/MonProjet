@@ -1,5 +1,5 @@
 <?php
     require('../bootstrap.php');
 
-    getOrdersJson();
+    echo getOrdersJson();
 
