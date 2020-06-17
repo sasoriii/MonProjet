@@ -4,17 +4,17 @@
 
 <table style="width: 400px">
     <tr>
-        <td colspan="4">Votre panier</td>
+        <td colspan="4">Your cart</td>
     </tr>
     <tr>
         <td>Name</td>
-        <td>Quantite</td>
-        <td>Prix unitaire</td>
+        <td>Quantity</td>
+        <td>Price for one</td>
     </tr>
     <?php $nbArticles = getNbItemsInCart(); ?>
     <?php if ($nbArticles <= 0): ?>
         <tr>
-            <td>Votre panier est vide</td>
+            <td>Your cart is empty</td>
         </tr>
     <?php endif ?>
     <?php foreach (getCartLines() as $line): ?>
@@ -32,7 +32,7 @@
     <?php endforeach ?>
 </table>
 <div>
-    <a href="formulaire.php">
+    <a href="form.php">
         Next
     </a>
 </div>

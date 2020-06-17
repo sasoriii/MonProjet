@@ -1,22 +1,22 @@
 <?php require('../bootstrap.php');
 session_destroy();
 session_start();
-$mailconnect = htmlspecialchars($_POST['mailconnect']);
-$mdpconnect = $_POST['mdpconnect'];
+$mailConnect = htmlspecialchars($_POST['mailConnect']);
+$mdpConnect = $_POST['mdpConnect'];
 
-if(! isset($_POST['formconnexion'])){
+if (! isset($_POST['formConnexion'])) {
     throw new Exception("missing form");
 }
 
-if(empty($_POST['mailconnect']) ){
+if (empty($_POST['mailConnect']) ) {
     throw new Exception("pas de mail");
 }
 
-if(empty($_POST['mdpconnect']) ){
+if (empty($_POST['mdpConnect']) ) {
     throw new Exception("pas de mdp");
 }
 
-if ( ! login($mailconnect, $mdpconnect)){
+if ( ! login($mailConnect, $mdpConnect)) {
     throw new Exception("Login ou mot de passe incorrect");
 }
 

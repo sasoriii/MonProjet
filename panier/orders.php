@@ -4,10 +4,10 @@
 
 <main>
     <h1 class="text-center">
-        Holyind
+        Holywind
     </h1>
     <h3 class="text-center">
-        Voici le recap de toutes les commande
+        All order
     </h3>
     <?php countLines(); ?>
     <table style="border: 1px solid black">
@@ -30,7 +30,7 @@
                     <?= getTotalOrder($order['order_id']) ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <a href="bonCommande.php?id=<?= $order['order_id'] ?>">
+                    <a href="purchaseOrder.php?id=<?= $order['order_id'] ?>">
                         details
                     </a>
                 </td>

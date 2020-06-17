@@ -6,15 +6,15 @@
 
 <main>
     <h1 class="text-center">
-        Holyind
+        Holywind
     </h1>
     <h3 class="text-center">
-        Voici le recap de votre commande
+        One order
     </h3>
     <table style="border: 1px solid black">
         <tr>
             <td style="border: 1px solid black">
-                ordeline id
+                orderLine id
             </td>
             <td style="border: 1px solid black">
                 order id
@@ -26,10 +26,10 @@
                 quantity
             </td>
             <td style="border: 1px solid black">
-                prix unitaire
+                unique price
             </td>
             <td style="border: 1px solid black">
-                prix total
+                total price
             </td>
         </tr>
         <?php foreach (getLines($orderId) as $line): ?>
@@ -70,7 +70,7 @@
         </tr>
     </table>
     <div>
-        <a href="commandes.php">
+        <a href="orders.php">
             Next
         </a>
     </div>

@@ -2,7 +2,7 @@
 
 <?php include_once "../css/header.php"; ?>
 
-<div align="center">
+<div>
     <h2>
         Inscription
     </h2>
@@ -11,72 +11,72 @@
     <form method="POST" action="createUser.php">
         <table>
             <tr>
-                <td align="right">
+                <td>
                     <label for="pseudo">
                         Pseudo :
                     </label>
                 </td>
                 <td>
-                    <input type="text" placeholder="Votre pseudo" id="pseudo" name="pseudo"/>
+                    <input type="text" placeholder="Your pseudo" id="pseudo" name="pseudo"/>
                 </td>
             </tr>
             <tr>
-                <td align="right">
+                <td>
                     <label for="mail">
                         Mail :
                     </label>
                 </td>
                 <td>
-                    <input type="email" placeholder="Votre mail" id="mail" name="mail"/>
+                    <input type="email" placeholder="Your mail" id="mail" name="mail"/>
                 </td>
             </tr>
             <tr>
-                <td align="right">
+                <td>
                     <label for="mail2">
                         Confirmation du mail :
                     </label>
                 </td>
                 <td>
-                    <input type="email" placeholder="Confirmez votre mail" id="mail2" name="mail2"/>
+                    <input type="email" placeholder="Confirm your mail" id="mail2" name="mail2"/>
                 </td>
             </tr>
             <tr>
-                <td align="right">
+                <td>
                     <label for="mdp">
-                        Mot de passe :
+                        Mot de passe :mail
                     </label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Votre mot de passe" id="mdp" name="mdp"/>
+                    <input type="password" placeholder="Your password" id="mdp" name="mdp"/>
                 </td>
             </tr>
             <tr>
-                <td align="right">
+                <td>
                     <label for="mdp2">
-                        Confirmation du mot de passe :
+                        Confirm your password :
                     </label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Confirmez votre mdp" id="mdp2" name="mdp2"/>
+                    <input type="password" placeholder="Confirm your password" id="mdp2" name="mdp2"/>
                 </td>
             </tr>
             <tr>
                 <td>
 
                 </td>
-                <td align="center">
+                <td>
                     <br/>
-                    <input type="submit" name="forminscription" value="Je m'inscris"/>
+                    <input type="submit" name="formInscription" value="create account"/>
                 </td>
             </tr>
             <tr>
                 <td>
 
                 </td>
-                <td align="center">
+                <td>
                     <br/>
-                    <a href="connexion.php">
-                        Me connecter
+                    <a href="connection.php">
+                        Connect
                     </a>
                 </td>
             </tr>
