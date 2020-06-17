@@ -1,6 +1,5 @@
 <?php require('../bootstrap.php'); ?>
 
-
 <?php include_once "../css/header.php"; ?>
 
 <div align="center">

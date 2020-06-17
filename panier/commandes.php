@@ -18,19 +18,19 @@
             <td style="border: 1px solid black">Détails par commande</td>
         </tr>
         <form name="redirection" method="post" action="">
-            <?php foreach (getOrders() as $line): ?>
+            <?php foreach (getOrders() as $order): ?>
             <tr>
                 <td style="border: 1px solid black">
-                    <?= $line['order_id']; ?>
+                    <?= $order['order_id']; ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <?= countOrderLines($line['order_id']); ?>
+                    <?= countOrderLines($order['order_id']); ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <?= getTotalOrder($line['order_id']) ?>
+                    <?= getTotalOrder($order['order_id']) ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <a href="bonCommande.php?id=<?= $line['order_id'] ?>">
+                    <a href="bonCommande.php?id=<?= $order['order_id'] ?>">
                         details
                     </a>
                 </td>

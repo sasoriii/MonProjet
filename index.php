@@ -2,7 +2,6 @@
 
 <?php include_once "css/header.php"; ?>
 
-
 <main>
     <h1 class="text-center">
         Holywind
@@ -18,6 +17,3 @@
 </main>
 
 <?php include_once "css/footer.php"; ?>
-
-
-

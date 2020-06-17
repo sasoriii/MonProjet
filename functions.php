@@ -7,8 +7,9 @@
         return $donnees;
     }
 
-    function addToCart(int $productId) {
-        if ( ! isset($_SESSION['panier'])) {
+    function addToCart(int $productId)
+    {
+        if (!isset($_SESSION['panier'])) {
             $_SESSION['panier'] = [];
         }
 
@@ -49,7 +50,7 @@
         $sth = $bdd->prepare("
             INSERT INTO `order` (email)
             VALUES(:email)");
-        $sth->bindParam(':email',$email);
+        $sth->bindParam(':email', $email);
 
         $sth->execute();
         $orderId = $bdd->lastInsertId();
@@ -60,7 +61,7 @@
             $sth = $bdd->prepare("
             INSERT INTO `orderline` (product_id, quantity, order_id)
             VALUES(:product_id , :product_quantity, :last_id)");
-            $sth->bindParam(':product_id',$cartLine['product_id']);
+            $sth->bindParam(':product_id', $cartLine['product_id']);
             $sth->bindParam(':product_quantity', $cartLine['product_quantity']);
             $sth->bindParam(':last_id', $orderId);
             $sth->execute();
@@ -84,6 +85,59 @@
         return $lines;
     }
 
+    function getOrdersJson()
+    {
+        $json = [];
+
+        foreach (getOrders() as $order) {
+            $lines = getLines($order['order_id']);
+
+            $jsonLines = [];
+
+            foreach ($lines as $line) {
+                $line['product_name'] = getProductName($line['product_id']);
+                $jsonLines[] = $line;
+            }
+
+            $tablo = [
+                "order_id" => $order['order_id'],
+                "nbr order line" => countOrderLines($order['order_id']),
+                "pricetotal" => getTotalOrder($order['order_id']),
+                "lines" => $jsonLines
+            ];
+
+            $json['order'][] = $tablo;
+        }
+        pre($json);
+        echo json_encode($json);
+    }
+
+    function getOrderJson(int $orderId)
+    {
+        $json = [];
+
+        $lines = getLines($orderId);
+
+        $jsonLines = [];
+
+        foreach ($lines as $line) {
+            $line['product_name'] = getProductName($line['product_id']);
+            $jsonLines[] = $line;
+        }
+
+        $tablo = [
+            "order_id" => $orderId,
+            "nbr order line" => countOrderLines($orderId),
+            "pricetotal" => getTotalOrder($orderId),
+            "lines" => $jsonLines
+        ];
+
+        $json['order'] = $tablo;
+
+        pre($json);
+        echo json_encode($json);
+    }
+
     function countOrderLines(int $orderId): int
     {
         $sql = "SELECT COUNT(orderline_id)  AS cnt FROM orderline WHERE order_id=$orderId";
@@ -104,7 +158,7 @@
 
         $product = selectOneRow($sql);
 
-        if ($throw && ! $product) {
+        if ($throw && !$product) {
             throw new Exception("product $productId not exist");
         }
 
@@ -156,7 +210,7 @@
         $sth = $connection->prepare($sql);
         $sth->execute();
 
-        $row =  $sth->fetch();
+        $row = $sth->fetch();
 
         return $row ?: null;
     }
@@ -201,7 +255,7 @@
 
         $userInfo = $request->fetch();
 
-        if (! $userInfo) {
+        if (!$userInfo) {
             return false;
         }
 
@@ -225,15 +279,13 @@
     {
         $pseudolength = strlen($pseudo);
 
-        if ($pseudolength == 0 ) {
+        if ($pseudolength == 0) {
             return false;
         }
 
         if ($pseudolength > 255) {
             return false;
-        }
-
-        else return true;
+        } else return true;
     }
 
     function createUser($pseudo, $mail, $mdp)
