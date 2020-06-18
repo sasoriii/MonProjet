@@ -293,9 +293,12 @@ function getUserId()
     return $_SESSION['id'];
 }
 
-function view($view, array $vars)
+function view($view, array $vars = null)
 {
-    $path = '../view/' . $view;
-    extract($vars);
+    $path = 'view/' . $view;
+
+    if ($vars !== null) {
+        extract($vars);
+    }
     require($path);
 }

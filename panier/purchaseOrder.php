@@ -1,5 +1,6 @@
-<?php require('../bootstrap.php');
-    $orderId = $_GET['id'];
+<?php
+require('../bootstrap.php');
+$orderId = $_GET['id'];
 ?>
 
 <?php include_once "../css/header.php"; ?>
