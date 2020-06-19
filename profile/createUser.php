@@ -6,26 +6,26 @@ $mail2 = htmlspecialchars($_POST['mail2']);
 $mdp = sha1($_POST['mdp']);
 $mdp2 = sha1($_POST['mdp2']);
 
-if ( ! isset($_POST['forminscription'])){
+if ( ! isset($_POST['formInscription'])){
     throw new Exception("missing form");
 }
 
 if ( ! isPseudoValid($_POST['pseudo'])){
-    throw new Exception("Pseudo invalide");
+    throw new Exception("Pseudo invalid");
 }
 
 if (empty($_POST['mail'])){
     throw new Exception("mail vide");
 }
 if (! isEmailAvailable($_POST['mail'])) {
-    throw new Exception("mail invalide");
+    throw new Exception("mail invalid");
 }
 
 if (empty($_POST['mail2'])){
     throw new Exception("mail 2 vide");
 }
 if (! isEmailAvailable($_POST['mail2'])){
-    throw new Exception("mail2 invalide");
+    throw new Exception("mail2 invalid");
 }
 
 if (($_POST['mail']) != ($_POST['mail2'])){
@@ -46,4 +46,4 @@ if (($_POST['mdp']) != ($_POST['mdp2'])){
 
 createUser($pseudo, $mail, $mdp);
 
-header("Location: /profile/connexion.php");
+header("Location: /profile/connection.php");

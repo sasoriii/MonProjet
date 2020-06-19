@@ -8,4 +8,4 @@ $orderId = createOrder($cart, $email);
 
 resetCard();
 
-header("Location: /panier/bonCommande.php?id=$orderId") ;
+header("Location: /panier/purchaseOrder.php?id=$orderId") ;

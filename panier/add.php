@@ -4,5 +4,5 @@ $productId = $_GET['product_id'];
 
 addToCart($productId);
 
-header('Location: /panier/panier.php');
+header('Location: /panier/cart.php');
 exit;

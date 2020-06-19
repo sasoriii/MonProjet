@@ -47,7 +47,7 @@
         </ul>
         <ul>
             <li>
-                <a href="../panier/panier.php">
+                <a href="../panier/cart.php">
                     Panier
                 </a>
             </li>
@@ -59,7 +59,7 @@
         <div class="app-bar-container ml-auto" data-flexdirection="reverse">
         </div>
         <span class="mif-1x mif-user fg-black">
-        <a href="../profile/connexion.php">
+        <a href="../profile/connection.php">
             Mon compte / connexion
         </a>
     </span>

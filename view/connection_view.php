@@ -1,32 +1,34 @@
-<?php require('../bootstrap.php'); ?>
-
 <?php include_once "../css/header.php"; ?>
 
-<div align="center">
+<div>
     <h2>
-        Connexion
+        Connection
     </h2>
     <br/>
     <br/>
     <form method="POST" action="makeConnexion.php">
         <table>
             <tr>
-                <td align="right">
-                    <input type="text" name="mailconnect" placeholder="Mail">
+                <td>
+                    <label>
+                        <input type="text" name="mailConnect" placeholder="Mail">
+                    </label>
                 </td>
             </tr>
             <tr>
-                <td align="right">
-                    <input type="password" name="mdpconnect" placeholder="Mot de passe">
+                <td>
+                    <label>
+                        <input type="password" name="mdpConnect" placeholder="Mot de passe">
+                    </label>
                 </td>
             </tr>
             <tr>
-                <td align="right">
-                    <input type="submit" name="formconnexion" value="Se connecter">
+                <td>
+                    <input type="submit" name="formConnexion" value="Se connecter">
                 </td>
             </tr>
             <tr>
-                <td align="right">
+                <td>
                     <br/>
                     <a href="inscription.php">
                         inscription

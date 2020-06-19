@@ -2,35 +2,33 @@
 function getShop()
 {
     $bdd = getConnection();
-    $reponse = $bdd->query('SELECT * FROM product');
-    $donnees = $reponse->fetchAll();
-    return $donnees;
+    $response = $bdd->query('SELECT * FROM product');
+    $data = $response->fetchAll();
+    return $data;
 }
 
 function addToCart(int $productId)
 {
-    if (!isset($_SESSION['panier'])) {
-        $_SESSION['panier'] = [];
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
     }
-
     getProduct($productId, true);
 
     $line = [];
     $line['product_quantity'] = 1;
     $line['product_id'] = $productId;
 
-    if (isset($_SESSION['panier'][$productId])) {
-        $_SESSION['panier'][$productId]['product_quantity']++;
+    if (isset($_SESSION['cart'][$productId])) {
+        $_SESSION['cart'][$productId]['product_quantity']++;
     } else {
-        $_SESSION['panier'][$productId] = $line;
+        $_SESSION['cart'][$productId] = $line;
     }
-
     return true;
 }
 
 function getNbItemsInCart()
 {
-    return count($_SESSION['panier']);
+    return count($_SESSION['cart']);
 }
 
 function getCartLines(): array
@@ -40,15 +38,13 @@ function getCartLines(): array
 
 function getCart(): array
 {
-    return $_SESSION['panier'] ?? [];
+    return $_SESSION['cart'] ?? [];
 }
 
 function createOrder($cart, $email): int
 {
     $bdd = getConnection();
-    $sth = $bdd->prepare("
-        INSERT INTO `order` (email)
-        VALUES(:email)");
+    $sth = $bdd->prepare("INSERT INTO `order` (email) VALUES(:email)");
     $sth->bindParam(':email', $email);
 
     $sth->execute();
@@ -67,6 +63,7 @@ function createOrder($cart, $email): int
     }
 
     return $orderId;
+
 }
 
 function getLines(int $orderId)
@@ -83,13 +80,12 @@ function getOrders()
     return $lines;
 }
 
-function getOrdersJson()
+function getOrdersWithLines()
 {
     $json = [];
 
     foreach (getOrders() as $order) {
         $lines = getLines($order['order_id']);
-
         $jsonLines = [];
 
         foreach ($lines as $line) {
@@ -97,25 +93,23 @@ function getOrdersJson()
             $jsonLines[] = $line;
         }
 
-        $tablo = [
+        $arrayJson = [
             "order_id" => $order['order_id'],
             "nbr order line" => countOrderLines($order['order_id']),
-            "pricetotal" => getTotalOrder($order['order_id']),
+            "price total" => getTotalOrder($order['order_id']),
             "lines" => $jsonLines
         ];
 
-        $json['order'][] = $tablo;
+        $json['order'][] = $arrayJson;
     }
-    pre($json);
-    echo json_encode($json);
+    return $json;
 }
 
-function getOrderWithLines(int $orderId)
+function getOrderWithLine(int $orderId)
 {
     $json = [];
 
     $lines = getLines($orderId);
-
     $jsonLines = [];
 
     foreach ($lines as $line) {
@@ -123,14 +117,14 @@ function getOrderWithLines(int $orderId)
         $jsonLines[] = $line;
     }
 
-    $tablo = [
+    $arrayInfo = [
         "order_id" => $orderId,
         "nbr order line" => countOrderLines($orderId),
-        "pricetotal" => getTotalOrder($orderId),
+        "price total" => getTotalOrder($orderId),
         "lines" => $jsonLines
     ];
 
-    $json['order'] = $tablo;
+    $json['order'] = $arrayInfo;
 
     return $json;
 }
@@ -165,8 +159,7 @@ function getProduct($productId, $throw = false): ?array
 function getProductName(int $productId): ?string
 {
     $row = getProduct($productId);
-
-    return $row ? $row['product_name'] : null;
+     return $row ? $row['product_name'] : null;
 }
 
 function getProductPrice(int $productId): ?int
@@ -229,17 +222,17 @@ function pre($var)
 
 function resetCard()
 {
-    $_SESSION['panier'] = [];
+    $_SESSION['cart'] = [];
 }
 
-function getProfile(int $id):array
+function getProfile(int $id)
 {
     $pdo = getConnection();
-    $requser = $pdo->prepare('SELECT * FROM espace_membre WHERE id = ?');
-    $requser->execute(array($id));
-    $userinfo = $requser->fetch();
+    $request = $pdo->prepare('SELECT * FROM espace_membre WHERE id = ?');
+    $request->execute(array($id));
+    $userInfo = $request->fetch();
 
-    return $userinfo;
+    return $userInfo;
 }
 
 function login($email, $password)
@@ -266,23 +259,24 @@ function login($email, $password)
 function isEmailAvailable($mail)
 {
     $pdo = getConnection();
-    $reqmail = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ?");
-    $reqmail->execute(array($mail));
+    $requestMail = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ?");
+    $requestMail->execute(array($mail));
 
-    return $reqmail->rowCount() == 0;
+    return $requestMail->rowCount() == 0;
 }
 
 function isPseudoValid($pseudo)
 {
-    $pseudolength = strlen($pseudo);
+    $pseudoLength = strlen($pseudo);
 
-    if ($pseudolength == 0) {
+    if ($pseudoLength == 0) {
         return false;
     }
 
-    if ($pseudolength > 255) {
+    if ($pseudoLength > 255) {
         return false;
-    } else {
+    }
+    else {
         return true;
     }
 }
@@ -290,11 +284,21 @@ function isPseudoValid($pseudo)
 function createUser($pseudo, $mail, $mdp)
 {
     $pdo = getConnection();
-    $insertmbr = $pdo->prepare("INSERT INTO espace_membre(pseudo, mail, motdepasse) VALUES(?, ?, ?)");
-    $insertmbr->execute(array($pseudo, $mail, $mdp));
+    $insertMember = $pdo->prepare("INSERT INTO espace_membre(pseudo, mail, motdepasse) VALUES(?, ?, ?)");
+    $insertMember->execute(array($pseudo, $mail, $mdp));
 }
 
 function getUserId()
 {
     return $_SESSION['id'];
+}
+
+function view($view, array $vars = null)
+{
+    $path = 'view/' . $view;
+
+    if ($vars !== null) {
+        extract($vars);
+    }
+    require($path);
 }

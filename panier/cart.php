@@ -1,4 +1,4 @@
 <?php
 require('../bootstrap.php');
 
-view('shop_view.php');
+view('cart_view.php');
