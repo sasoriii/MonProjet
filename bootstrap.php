@@ -1,4 +1,5 @@
-<?php require 'carbon/vendor/autoload.php';
+<?php
+require __DIR__ . '/vendor/autoload.php';
 require 'functions.php';
 session_start();
 

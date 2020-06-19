@@ -145,6 +145,7 @@ function countLines()
 
 function getProduct($productId, $throw = false): ?array
 {
+    return [];
     $sql = "SELECT * FROM product WHERE product_id = $productId";
 
     $product = selectOneRow($sql);
@@ -301,4 +302,9 @@ function view($view, array $vars = null)
         extract($vars);
     }
     require($path);
+}
+
+function sum(float $x, float $y):float
+{
+    return $x + $y;
 }
