@@ -245,7 +245,6 @@ function login($email, $password)
     $request->execute(array($email, $password));
 
     $userInfo = $request->fetch();
-
     if (!$userInfo) {
         return false;
     }
@@ -266,7 +265,7 @@ function isEmailAvailable($mail)
     return $requestMail->rowCount() == 0;
 }
 
-function isPseudoValid($pseudo)
+function isPseudoValid(string $pseudo):bool
 {
     $pseudoLength = strlen($pseudo);
 
@@ -274,7 +273,7 @@ function isPseudoValid($pseudo)
         return false;
     }
 
-    if ($pseudoLength > 255) {
+    if ($pseudoLength > 40) {
         return false;
     }
     else {
@@ -306,5 +305,13 @@ function view($view, array $vars = null)
 
 function sum(float $x, float $y):float
 {
-    return $x + $y;
+    return $x + $y +1 ;
+}
+
+function getUser($pseudo, $mail, $motdepasse)
+{
+    $pdo = getConnection();
+    $request = $pdo->prepare("SELECT * FROM espace_membre WHERE pseudo = ? AND mail = ? AND motdepasse = ?");
+    $request->execute(array($pseudo , $mail, $motdepasse));
+    return $request->rowCount() == 0;
 }
