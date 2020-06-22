@@ -1,13 +1,17 @@
 <?php
 require(__DIR__ . '/../bootstrap.php');
 
-$pdo = getConnection();
+$id = 27 ;
 
-if(isset($_GET['id']) AND $_GET['id'] > 0) {
-    $getid = intval($_GET['id']);
-    $requser = $pdo->prepare('SELECT * FROM espace_membre WHERE id = ?');
-    $requser->execute(array($getid));
-    $userinfo = $requser->fetch();
-    pre($userinfo['pseudo']);
-    return $userinfo['pseudo'];
+$result = getProfile($id);
+
+if ($result['pseudo'] !== "z" ) {
+    throw new Exception("error");
+}
+
+if ($result['motdepasse'] !== "z" ) {
+    throw new Exception("error");
+}
+if ($result['mail'] !== "z@gmail.com" ) {
+    throw new Exception("error");
 }
