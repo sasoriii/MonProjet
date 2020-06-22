@@ -1,13 +1,15 @@
 <?php
 require(__DIR__ . '/../bootstrap.php');
 
-$pseudo = "zhhhhhhhhhhhhhhhhhhhh";
-$mail = "zhhhhhhhhhhhhhhhhhh@gmail.com";
-$motdepasse = "zhhhhhhhhhhhhhhh";
+$n = 10 ;
 
-//createUser($pseudo, $mail, $mdp);
+$pseudo = getRandomPseudo($n);
+$mail = getRandomMail($n);
+$mdp = getRandomMDP($n);
 
-$result = getUser($pseudo, $mail, $motdepasse);
+createUser($pseudo, $mail, $mdp);
+
+$result = getUser($pseudo, $mail, $mdp);
 
 if ($result !== false) {
     throw new Exception("error");

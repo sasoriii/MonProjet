@@ -315,3 +315,38 @@ function getUser($pseudo, $mail, $motdepasse)
     $request->execute(array($pseudo , $mail, $motdepasse));
     return $request->rowCount() == 0;
 }
+
+function getRandomPseudo($n) {
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index];
+    }
+
+    return $randomString;
+}
+
+function getRandomMDP($n) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index] ;
+    }
+
+    return $randomString;
+}
+
+function getRandomMail($n) {
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomString = '';
+
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $randomString .= $characters[$index] ;
+    }
+    return $randomString;
+}
