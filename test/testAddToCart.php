@@ -1,4 +1,5 @@
-<?php require('../bootstrap.php');
+<?php
+require(__DIR__ . '/../bootstrap.php');
 
 addToCart(1);
 addToCart(3);

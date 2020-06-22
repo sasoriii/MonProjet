@@ -145,7 +145,7 @@ function countLines()
 
 function getProduct($productId, $throw = false): ?array
 {
-    return [];
+
     $sql = "SELECT * FROM product WHERE product_id = $productId";
 
     $product = selectOneRow($sql);
