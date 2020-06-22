@@ -1,4 +1,5 @@
-<?php require('../bootstrap.php');
+<?php
+require(__DIR__ . '/../bootstrap.php');
 
 $pdo = getConnection();
 
