@@ -4,7 +4,7 @@ require(__DIR__ . '/../bootstrap.php');
 $id = 27 ;
 
 $result = getProfile($id);
-
+pre($result["pseudo"]);
 if ($result['pseudo'] !== "z" ) {
     throw new Exception("error");
 }
