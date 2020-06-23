@@ -350,3 +350,9 @@ function getRandomMail($n) {
     }
     return $randomString;
 }
+
+function testMultiplication(){
+    $this->assertEquals(4, 2*2);
+
+
+}

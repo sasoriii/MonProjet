@@ -6,6 +6,6 @@ $y = 15;
 
 $sum = sum($x, $y);
 
-if ($sum != 25) {
-    throw new Exception("error");
-}
+
+
+var_dump($result->assertEquals(4, 2*2));
