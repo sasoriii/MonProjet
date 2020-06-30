@@ -1,5 +1,5 @@
 <?php
-function getShop()
+function getProducts()
 {
     $bdd = getConnection();
     $response = $bdd->query('SELECT * FROM product');
@@ -15,39 +15,16 @@ function getShop()
         $product->quantity = $data['quantity'];
         $product->img = $data['img'];
 
-        $listproduct[] = $product;
+        $listProduct[] = $product;
     }
 
     return $listproduct;
 }
 
-function getNbItemsInCart()
-{
-    return count($_SESSION['cart']);
-}
 
-function getCartLines()
-{
-    return getCart();
-}
 
-function getCart()
-{
-    $cartLines = $_SESSION['cart'] ;
 
-    $cartObj = [];
 
-    foreach ($cartLines as $cartLine){
-        $line = new Cart();
-        $line->id = $cartLine['id'];
-        $line->quantity = $cartLine['quantity'];
-
-        $cartObj[] = $line;
-    }
-
-    return $cartObj ;
-
-}
 
 function createOrder($cart, $email)
 {
@@ -77,38 +54,6 @@ function createOrder($cart, $email)
 
 }
 
-function getLines(int $orderId)
-{
-    $sql = "SELECT * FROM orderline WHERE order_id=$orderId";
-    $rows = selectRows($sql);
-    $lines = [];
-
-    foreach ($rows as $row) {
-        $line = new OrderLine();
-        $line->id = $row['id'];
-        $line->product_id = $row['product_id'];
-        $line->quantity = $row['quantity'];
-        $line->order_id = $row['order_id'];
-
-        $lines[] = $line;
-    }
-
-    return $lines;
-}
-
-function getTotal($orderId){
-    $total = 0;
-
-    foreach (getLines($orderId) as $line) {
-        $productId = $line->product_id;
-        $quantity = $line->quantity;
-        $price = getProductPrice($productId);
-        $totalLine = $price * $quantity;
-        $total = $total + $totalLine;
-    }
-
-    return $total;
-}
 
 function getOrder($orderId)
 {
@@ -145,12 +90,7 @@ function getOrders()
     return $lines;
 }
 
-function countOrderLines(int $orderId): int
-{
-    $sql = "SELECT COUNT(id)  AS cnt FROM orderline WHERE order_id=$orderId";
-    $line = selectOneRow($sql);
-    return $line['cnt'];
-}
+
 
 function getProduct($productId, $throw = false)
 {
@@ -180,12 +120,6 @@ function getProduct($productId, $throw = false)
 
 }
 
-function getProductPrice(int $productId): ?string
-{
-    $row = getProduct($productId);
-
-    return $row->price ;
-}
 
 function selectRows($sql): ?array
 {
@@ -223,10 +157,6 @@ function pre($var)
     echo "</pre>";
 }
 
-function resetCard()
-{
-    $_SESSION['cart'] = [];
-}
 
 function getProfile(int $id)
 {

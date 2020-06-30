@@ -1,5 +1,7 @@
 <?php include_once "../css/header.php"; ?>
-
+<?php
+$cart = new Cart();
+?>
     <table style="width: 400px">
         <tr>
             <td colspan="4">Your cart</td>
@@ -11,25 +13,24 @@
 
         </tr>
 
-        <?php $nbArticles = getNbItemsInCart(); ?>
+        <?php $nbArticles = $cart->getNbItems(); ?>
+        
         <?php if ($nbArticles <= 0): ?>
             <tr>
                 <td>Your cart is empty</td>
             </tr>
         <?php endif ?>
-        <?php foreach (getCartLines() as $line): ?>
+        
+        <?php foreach ($cart->getLines() as $line): ?>
             <tr>
                 <td>
-                    <?php $productId = $line->id;
-                    $product = new Product();
-                    ?>
-                    <?= $product->getName($productId)?>
+                    <?= $line->getProduct()->name ?>
                 </td>
                 <td>
                     <?= $line->quantity ?>
                 </td>
                 <td>
-                    <?= $product->getPrice($productId) ?>
+                    <?= $line->getProduct()->price ?>
                 </td>
             </tr>
         <?php endforeach ?>

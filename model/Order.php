@@ -52,4 +52,27 @@ class Order
     }
 
 
+    function getTotal(){
+        $total = 0;
+
+        foreach (getLines($orderId) as $line) {
+            $productId = $line->product_id;
+            $quantity = $line->quantity;
+            $price = getProductPrice($productId);
+            $totalLine = $price * $quantity;
+            $total = $total + $totalLine;
+        }
+
+        return $total;
+    }
+
+
+    function countOrderLines(int $orderId): int
+{
+    $sql = "SELECT COUNT(id)  AS cnt FROM orderline WHERE order_id=$orderId";
+    $line = selectOneRow($sql);
+    return $line['cnt'];
+}
+
+
 }

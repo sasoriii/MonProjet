@@ -2,16 +2,12 @@
 
 class Cart
 {
-    public $id;
-    public $quantity;
-
-    function add(int $productId)
+  
+    function add(Product $product)
     {
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
         }
-
-        $product = getProduct($productId, true);
 
         if (isset($_SESSION['cart'][$product->id])) {
             $_SESSION['cart'][$product->id]['quantity']++;
@@ -22,6 +18,30 @@ class Cart
             $line['id'] = $product->id;
             $_SESSION['cart'][$product->id] = $line;
         }
+
         return true;
     }
+
+    function getLines()
+    {
+        $cartLines = $_SESSION['cart'] ;
+
+        $lines = [];
+
+        foreach ($cartLines as $cartLine){
+            $line = new CartLine();
+            $line->id = $cartLine['id'];
+            $line->quantity = $cartLine['quantity'];
+
+            $lines[] = $line;
+        }
+
+        return $lines;
+    }
+
+    function getNbItems()
+    {
+        return count($_SESSION['cart']);
+    }
+
 }
