@@ -8,13 +8,14 @@
     <h3 class="text-center">
         Welcome to the shop !
     </h3>
+
     <?php foreach (getShop() as $data) { ?>
         <div class="w-25">
             <p>
-                <strong> <?= $data['product_id']; ?> </strong> : <?= $data['product_name']; ?><br/>
-                <?= '<a href="product.php"> <img src="/img/' . $data["product_img"] . '"></a>  ' ?>
-                Price : <?= $data['product_price']; ?> euros !<br/>
-                <a href="/panier/add.php?product_id=<?= $data['product_id'] ?>">
+                <strong> <?= $data->id; ?> </strong> : <?= $data->name; ?><br/>
+                <?= '<a href="product.php"> <img src="/img/' . $data->img . '"></a>  ' ?>
+                Price : <?= $data->price; ?> euros !<br/>
+                <a href="/panier/add.php?product_id=<?= $data->id?>">
                     Add to cart
                 </a>
             </p>

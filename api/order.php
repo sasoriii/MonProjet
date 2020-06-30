@@ -1,16 +1,37 @@
 <?php
 require('../bootstrap.php');
 
-if ($orderId = $_GET['id']){
-    $order = getOrderWithLine($orderId);
 
-    echo json_encode($order);
+if (!empty($_GET['id'])){
+    $orderId = $_GET['id'];
+    $orders = getOrder($orderId);
+
+    if (empty($orders)){
+        throw new Exception("error");
+    }
+    $list = [];
+
+    foreach ($orders as $order) {
+        $list[] = $order->toArray();
+    }
+
+    echo json_encode($list, JSON_PRETTY_PRINT);
 }
 
 else {
-    $order = getOrdersWithLines();
+    $orders = getOrders();
 
-    echo json_encode($order);
+
+
+
+    $list = [];
+
+    foreach ($orders as $order) {
+        $list[] = $order->toArray();
+    }
+
+
+    echo json_encode($list, JSON_PRETTY_PRINT);
 }
 
 

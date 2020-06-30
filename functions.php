@@ -3,27 +3,22 @@ function getShop()
 {
     $bdd = getConnection();
     $response = $bdd->query('SELECT * FROM product');
-    $data = $response->fetchAll();
-    return $data;
-}
+    $datas = $response->fetchAll();
+    $listproduct = [];
 
-function addToCart(int $productId)
-{
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
+    foreach ($datas as $data){
+        $product = new Product();
+        $product->id = $data['id'];
+        $product->name = $data['name'];
+        $product->price = $data['price'];
+        $product->description = $data['description'];
+        $product->quantity = $data['quantity'];
+        $product->img = $data['img'];
+
+        $listproduct[] = $product;
     }
-    getProduct($productId, true);
 
-    $line = [];
-    $line['product_quantity'] = 1;
-    $line['product_id'] = $productId;
-
-    if (isset($_SESSION['cart'][$productId])) {
-        $_SESSION['cart'][$productId]['product_quantity']++;
-    } else {
-        $_SESSION['cart'][$productId] = $line;
-    }
-    return true;
+    return $listproduct;
 }
 
 function getNbItemsInCart()
@@ -31,23 +26,38 @@ function getNbItemsInCart()
     return count($_SESSION['cart']);
 }
 
-function getCartLines(): array
+function getCartLines()
 {
     return getCart();
 }
 
-function getCart(): array
+function getCart()
 {
-    return $_SESSION['cart'] ?? [];
+    $cartLines = $_SESSION['cart'] ;
+
+    $cartObj = [];
+
+    foreach ($cartLines as $cartLine){
+        $line = new Cart();
+        $line->id = $cartLine['id'];
+        $line->quantity = $cartLine['quantity'];
+
+        $cartObj[] = $line;
+    }
+
+    return $cartObj ;
+
 }
 
-function createOrder($cart, $email): int
+function createOrder($cart, $email)
 {
+
     $bdd = getConnection();
     $sth = $bdd->prepare("INSERT INTO `order` (email) VALUES(:email)");
     $sth->bindParam(':email', $email);
 
     $sth->execute();
+
     $orderId = $bdd->lastInsertId();
 
     foreach ($cart as $cartLine) {
@@ -56,133 +66,125 @@ function createOrder($cart, $email): int
         $sth = $bdd->prepare("
         INSERT INTO `orderline` (product_id, quantity, order_id)
         VALUES(:product_id , :product_quantity, :last_id)");
-        $sth->bindParam(':product_id', $cartLine['product_id']);
-        $sth->bindParam(':product_quantity', $cartLine['product_quantity']);
+        $sth->bindParam(':product_id', $cartLine->id);
+        $sth->bindParam(':product_quantity', $cartLine->quantity);
         $sth->bindParam(':last_id', $orderId);
         $sth->execute();
     }
 
     return $orderId;
 
+
 }
 
 function getLines(int $orderId)
 {
     $sql = "SELECT * FROM orderline WHERE order_id=$orderId";
-    $lines = selectRows($sql);
+    $rows = selectRows($sql);
+    $lines = [];
+
+    foreach ($rows as $row) {
+        $line = new OrderLine();
+        $line->id = $row['id'];
+        $line->product_id = $row['product_id'];
+        $line->quantity = $row['quantity'];
+        $line->order_id = $row['order_id'];
+
+        $lines[] = $line;
+    }
+
+    return $lines;
+}
+
+function getTotal($orderId){
+    $total = 0;
+
+    foreach (getLines($orderId) as $line) {
+        $productId = $line->product_id;
+        $quantity = $line->quantity;
+        $price = getProductPrice($productId);
+        $totalLine = $price * $quantity;
+        $total = $total + $totalLine;
+    }
+
+    return $total;
+}
+
+function getOrder($orderId)
+{
+    $sql = "SELECT * FROM `order` WHERE id=$orderId";
+    $rows = selectRows($sql);
+    $lines = [];
+
+    foreach ($rows as $row){
+        $line = new Order();
+        $line->id = $row['id'];
+        $line->email = $row['email'];
+
+        $lines[] = $line;
+    }
+
     return $lines;
 }
 
 function getOrders()
 {
-    $sql = "SELECT * FROM `order` ORDER BY order_id";
-    $lines = selectRows($sql);
+    $sql = "SELECT * FROM `order` ORDER BY id";
+    $rows = selectRows($sql);
+
+    $lines = [];
+
+    foreach ($rows as $row){
+        $line = new Order();
+        $line->id = $row['id'];
+        $line->email = $row['email'];
+
+        $lines[] = $line;
+    }
+
     return $lines;
-}
-
-function getOrdersWithLines()
-{
-    $json = [];
-
-    foreach (getOrders() as $order) {
-        $lines = getLines($order['order_id']);
-        $jsonLines = [];
-
-        foreach ($lines as $line) {
-            $line['product_name'] = getProductName($line['product_id']);
-            $jsonLines[] = $line;
-        }
-
-        $arrayJson = [
-            "order_id" => $order['order_id'],
-            "nbr order line" => countOrderLines($order['order_id']),
-            "price total" => getTotalOrder($order['order_id']),
-            "lines" => $jsonLines
-        ];
-
-        $json['order'][] = $arrayJson;
-    }
-    return $json;
-}
-
-function getOrderWithLine(int $orderId)
-{
-    $json = [];
-
-    $lines = getLines($orderId);
-    $jsonLines = [];
-
-    foreach ($lines as $line) {
-        $line['product_name'] = getProductName($line['product_id']);
-        $jsonLines[] = $line;
-    }
-
-    $arrayInfo = [
-        "order_id" => $orderId,
-        "nbr order line" => countOrderLines($orderId),
-        "price total" => getTotalOrder($orderId),
-        "lines" => $jsonLines
-    ];
-
-    $json['order'] = $arrayInfo;
-
-    return $json;
 }
 
 function countOrderLines(int $orderId): int
 {
-    $sql = "SELECT COUNT(orderline_id)  AS cnt FROM orderline WHERE order_id=$orderId";
+    $sql = "SELECT COUNT(id)  AS cnt FROM orderline WHERE order_id=$orderId";
     $line = selectOneRow($sql);
     return $line['cnt'];
 }
 
-function countLines()
-{
-    $sql = "SELECT order_id FROM `order` ";
-    $lines = selectRows($sql);
-    return (count($lines));
-}
-
-function getProduct($productId, $throw = false): ?array
+function getProduct($productId, $throw = false)
 {
 
-    $sql = "SELECT * FROM product WHERE product_id = $productId";
+    $sql = "SELECT * FROM product WHERE id = $productId";
 
-    $product = selectOneRow($sql);
+    $row = selectOneRow($sql);
 
-    if ($throw && !$product) {
+    if ($throw && !$row) {
         throw new Exception("product $productId not exist");
     }
 
-    return $product ?: null;
-}
-
-function getProductName(int $productId): ?string
-{
-    $row = getProduct($productId);
-     return $row ? $row['product_name'] : null;
-}
-
-function getProductPrice(int $productId): ?int
-{
-    $row = getProduct($productId);
-
-    return $row ? $row['product_price'] : null;
-}
-
-function getTotalOrder($orderId)
-{
-    $total = 0;
-    $lines = getLines($orderId);
-
-    foreach ($lines as $line) {
-        $productPrice = getProductPrice($line['product_id']);
-        $quantity = $line['quantity'];
-        $totalLine = $productPrice * $quantity;
-        $total = $total + $totalLine;
+    if ( ! $row) {
+        return null;
     }
 
-    return $total;
+    $product = new Product();
+    $product->id = $row['id'];
+    $product->name = $row['name'];
+    $product->price = $row['price'];
+    $product->description = $row['description'];
+    $product->quantity = $row['quantity'];
+    $product->img = $row['img'];
+
+    return $product;
+
+
+}
+
+function getProductPrice(int $productId): ?string
+{
+    $row = getProduct($productId);
+
+    return $row->price ;
 }
 
 function selectRows($sql): ?array
@@ -349,10 +351,4 @@ function getRandomMail($n) {
         $randomString .= $characters[$index] ;
     }
     return $randomString;
-}
-
-function testMultiplication(){
-    $this->assertEquals(4, 2*2);
-
-
 }

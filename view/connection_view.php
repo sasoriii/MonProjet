@@ -23,7 +23,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td align="center">
                     <input type="submit" name="formConnexion" value="Se connecter">
                 </td>
             </tr>

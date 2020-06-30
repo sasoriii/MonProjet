@@ -7,7 +7,7 @@
     <h3 class="text-center">
         All order
     </h3>
-    <?php countLines(); ?>
+
     <table style="border: 1px solid black">
         <tr>
             <td style="border: 1px solid black">order id</td>
@@ -16,19 +16,20 @@
             <td style="border: 1px solid black">Détails par commande</td>
         </tr>
         <form name="redirection" method="post" action="">
+
             <?php foreach (getOrders() as $order): ?>
             <tr>
                 <td style="border: 1px solid black">
-                    <?= $order['order_id']; ?>
+                    <?= $orderId = $order->id; ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <?= countOrderLines($order['order_id']); ?>
+                    <?= countOrderLines($orderId); ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <?= getTotalOrder($order['order_id']) ?>
+                    <?= getTotal($orderId) ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <a href="purchaseOrder.php?id=<?= $order['order_id'] ?>">
+                    <a href="purchaseOrder.php?id=<?=$order->id?>">
                         details
                     </a>
                 </td>

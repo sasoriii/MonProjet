@@ -8,7 +8,9 @@
             <td>Name</td>
             <td>Quantity</td>
             <td>Price for one</td>
+
         </tr>
+
         <?php $nbArticles = getNbItemsInCart(); ?>
         <?php if ($nbArticles <= 0): ?>
             <tr>
@@ -18,13 +20,16 @@
         <?php foreach (getCartLines() as $line): ?>
             <tr>
                 <td>
-                    <?= getProductName($line['product_id']) ?>
+                    <?php $productId = $line->id;
+                    $product = new Product();
+                    ?>
+                    <?= $product->getName($productId)?>
                 </td>
                 <td>
-                    <?= $line['product_quantity'] ?>
+                    <?= $line->quantity ?>
                 </td>
                 <td>
-                    <?= getProductPrice($line['product_id']) ?>
+                    <?= $product->getPrice($productId) ?>
                 </td>
             </tr>
         <?php endforeach ?>

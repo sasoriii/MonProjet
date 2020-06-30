@@ -27,7 +27,7 @@
             </li>
 
             <li>
-                <a href="../shop/shop.php">
+                <a href="../shop/product.php">
                     Boutique
                 </a>
             </li>

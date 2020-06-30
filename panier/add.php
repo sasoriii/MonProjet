@@ -2,7 +2,9 @@
 
 $productId = $_GET['product_id'];
 
-addToCart($productId);
+$cart = new Cart();
+
+$cart->add($productId);
 
 header('Location: /panier/cart.php');
 exit;

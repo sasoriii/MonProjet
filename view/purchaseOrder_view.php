@@ -37,19 +37,22 @@
         <?php foreach (getLines($orderId) as $line): ?>
         <tr>
             <td style="border: 1px solid black">
-                <?= $line['order_id'] ?>
+
+                <?= $line->id?>
             </td>
             <td style="border: 1px solid black">
-                <?= $line['orderline_id'] ?>
+                <?= $line->order_id ?>
             </td>
             <td style="border: 1px solid black">
-                <?= getProductName($line['product_id']) ?>
+                <?php $productId = $line->product_id?>
+                <?php $product = new Product();?>
+                <?= $product->getName($productId)?>
             </td>
             <td style="border: 1px solid black">
-                <?= $line['quantity'] ?>
+                <?= $line->quantity ?>
             </td>
             <td style="border: 1px solid black">
-                <?= getProductPrice($line['product_id']) ?>
+                <?= $product->getPrice($productId) ?>
             </td>
             <?php endforeach ?>
             <td style="border: 1px solid black">
@@ -67,10 +70,11 @@
             <td style="border: 1px solid black">
             </td>
             <td style="border: 1px solid black">
-                <?= getTotalOrder($orderId) ?>
+                <?= $order = getTotal($orderId) ?>
             </td>
         </tr>
     </table>
+
     <div>
         <a href="orders.php">
             Next
