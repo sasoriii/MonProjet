@@ -1,4 +1,7 @@
-<?php include_once "../css/header.php"; ?>
+<?php
+include_once "../css/header.php";
+$orders = Order::getOrders();
+?>
 
 <main>
     <h1 class="text-center">
@@ -17,16 +20,16 @@
         </tr>
         <form name="redirection" method="post" action="">
 
-            <?php foreach (getOrders() as $order): ?>
+            <?php foreach (Order::getOrders() as $order): ?>
             <tr>
                 <td style="border: 1px solid black">
                     <?= $orderId = $order->id; ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <?= countOrderLines($orderId); ?>
+                    <?= $order->countOrderLines(); ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <?= getTotal($orderId) ?>
+                    <?= $order->getTotal(); ?>
                 </td>
                 <td style="border: 1px solid black">
                     <a href="purchaseOrder.php?id=<?=$order->id?>">
@@ -34,7 +37,6 @@
                     </a>
                 </td>
                 <?php endforeach ?>
-                <td style="border: 1px solid black"></td>
             </tr>
         </form>
     </table>

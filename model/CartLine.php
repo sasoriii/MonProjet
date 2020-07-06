@@ -3,8 +3,9 @@
 class CartLine
 {
   
-   protected $productId
-   protected $quantity;
+   public $productId;
+   public $quantity;
+   public $order_id;
 
    function getProduct()
    {

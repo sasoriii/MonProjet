@@ -13,24 +13,28 @@ $cart = new Cart();
 
         </tr>
 
-        <?php $nbArticles = $cart->getNbItems(); ?>
-        
+        <?php $nbArticles = $cart->getNbItems()?>
         <?php if ($nbArticles <= 0): ?>
             <tr>
                 <td>Your cart is empty</td>
             </tr>
         <?php endif ?>
-        
+
+        <?php
+
+        ?>
+
         <?php foreach ($cart->getLines() as $line): ?>
             <tr>
                 <td>
-                    <?= $line->getProduct()->name ?>
+                    <?php $id = $line->productId ?>
+                    <?= Product::getProduct($id)->name ?>
                 </td>
                 <td>
                     <?= $line->quantity ?>
                 </td>
                 <td>
-                    <?= $line->getProduct()->price ?>
+                    <?= Product::getProduct($id)->price ?>
                 </td>
             </tr>
         <?php endforeach ?>

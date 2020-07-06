@@ -4,7 +4,6 @@ function getProducts()
     $bdd = getConnection();
     $response = $bdd->query('SELECT * FROM product');
     $datas = $response->fetchAll();
-    $listproduct = [];
 
     foreach ($datas as $data){
         $product = new Product();
@@ -17,14 +16,8 @@ function getProducts()
 
         $listProduct[] = $product;
     }
-
-    return $listproduct;
+    return $listProduct;
 }
-
-
-
-
-
 
 function createOrder($cart, $email)
 {
@@ -38,7 +31,7 @@ function createOrder($cart, $email)
     $orderId = $bdd->lastInsertId();
 
     foreach ($cart as $cartLine) {
-
+        pre($cartLine);
         $bdd = getConnection();
         $sth = $bdd->prepare("
         INSERT INTO `orderline` (product_id, quantity, order_id)
@@ -50,10 +43,12 @@ function createOrder($cart, $email)
     }
 
     return $orderId;
-
-
 }
 
+function getCart()
+{
+    return $_SESSION['cart'];
+}
 
 function getOrder($orderId)
 {
@@ -90,37 +85,6 @@ function getOrders()
     return $lines;
 }
 
-
-
-function getProduct($productId, $throw = false)
-{
-
-    $sql = "SELECT * FROM product WHERE id = $productId";
-
-    $row = selectOneRow($sql);
-
-    if ($throw && !$row) {
-        throw new Exception("product $productId not exist");
-    }
-
-    if ( ! $row) {
-        return null;
-    }
-
-    $product = new Product();
-    $product->id = $row['id'];
-    $product->name = $row['name'];
-    $product->price = $row['price'];
-    $product->description = $row['description'];
-    $product->quantity = $row['quantity'];
-    $product->img = $row['img'];
-
-    return $product;
-
-
-}
-
-
 function selectRows($sql): ?array
 {
     $connection = getConnection();
@@ -128,6 +92,7 @@ function selectRows($sql): ?array
     $sth->execute();
 
     $rows = $sth->fetchAll();
+
     return $rows;
 }
 
@@ -147,6 +112,7 @@ function getConnection()
     $pdo = new PDO('mysql:host=localhost;dbname=holywind_db;charset=utf8', 'holywindtest', 'holywindmdp');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
     return $pdo;
 }
 

@@ -7,7 +7,4 @@ class OrderLine
     public $quantity;
     public $order_id;
 
-
-
-
 }

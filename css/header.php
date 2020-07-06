@@ -51,6 +51,11 @@
                     Panier
                 </a>
             </li>
+            <li>
+                <a href="../panier/reset.php">
+                    Vider le panier
+                </a>
+            </li>
         </ul>
         <?php use Carbon\Carbon;
 

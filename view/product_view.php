@@ -9,7 +9,7 @@
         Welcome to the shop !
     </h3>
 
-    <?php foreach (getShop() as $data) { ?>
+    <?php foreach (getProducts() as $data) { ?>
         <div class="w-25">
             <p>
                 <strong> <?= $data->id; ?> </strong> : <?= $data->name; ?><br/>

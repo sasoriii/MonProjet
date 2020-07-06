@@ -6,6 +6,7 @@ class Order
     public $email;
     public $order;
     public $lines = [];
+    public $orderLines = [];
 
     function toArray()
     {
@@ -25,9 +26,7 @@ class Order
             $lineData['order_id'] = $line->order_id;
 
             $data['lines'][] = $lineData ;
-
         }
-
         return $data;
     }
 
@@ -45,34 +44,82 @@ class Order
             $line->order_id = $row['order_id'];
 
             $lines[] = $line;
-
         }
-
         return $lines;
     }
 
+    static function getOrder($orderId): Order
+    {
+        $sql = "SELECT * FROM `order` WHERE id=$orderId";
+        $row = selectOneRow($sql);
+
+        $order = new Order();
+        $order->id = $row['id'];
+        $order->email = $row['email'];
+
+        $sql = "SELECT * FROM orderline WHERE order_id=$orderId";
+        $rows = selectRows($sql);
+
+        $order->orderLines = [];
+
+        foreach ($rows as $row){
+            $line = new OrderLine();
+            $line->id = $row['id'];
+
+            $line->product_id = $row['product_id'];
+            $line->quantity = $row['quantity'];
+            $line->order_id = $row['order_id'];
+
+            $order->orderLines[] = $line;
+        }
+        return $order;
+    }
+
+    static function getOrders(): array
+    {
+        $sql = "SELECT * FROM `order` ORDER BY id";
+        $rows = selectRows($sql);
+
+        $orders = [];
+
+        foreach ($rows as $row){
+            $order = new Order();
+
+            $order->id = $row['id'];
+            $order->email = $row['email'];
+            $sql = "SELECT * FROM orderline WHERE order_id=$order->id";
+            $orderlines = selectRows($sql);
+            $order->orderLines = [];
+
+            foreach ($orderlines as $orderline){
+                $line = new OrderLine();
+                $line->id = $orderline['id'];
+                $line->product_id = $orderline['product_id'];
+                $line->quantity = $orderline['quantity'];
+                $line->order_id = $orderline['order_id'];
+
+                $order->orderLines[] = $line;
+            }
+            $orders[] = $order;
+        }
+        return $orders;
+    }
 
     function getTotal(){
         $total = 0;
 
-        foreach (getLines($orderId) as $line) {
+        foreach (Order::getLines() as $line) {
             $productId = $line->product_id;
             $quantity = $line->quantity;
-            $price = getProductPrice($productId);
+            $price = Product::getProduct($productId)->price;
             $totalLine = $price * $quantity;
             $total = $total + $totalLine;
         }
-
         return $total;
     }
 
-
-    function countOrderLines(int $orderId): int
-{
-    $sql = "SELECT COUNT(id)  AS cnt FROM orderline WHERE order_id=$orderId";
-    $line = selectOneRow($sql);
-    return $line['cnt'];
-}
-
-
+    function countOrderLines(): int
+    {
+        return count($this->orderLines);
+    }
 }

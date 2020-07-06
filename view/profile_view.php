@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td >
-                <a href="deconnexion.php">
+                <a href="connection.php">
                     Disconnect
                 </a>
             </td>

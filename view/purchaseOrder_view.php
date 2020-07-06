@@ -2,7 +2,7 @@
 /**
  * @var $orderId
  */
-
+$order = Order::getOrder($orderId);
 ?>
 <?php include_once "../css/header.php"; ?>
 
@@ -13,6 +13,7 @@
     <h3 class="text-center">
         One order
     </h3>
+
     <table style="border: 1px solid black">
         <tr>
             <td style="border: 1px solid black">
@@ -34,29 +35,30 @@
                 total price
             </td>
         </tr>
-        <?php foreach (getLines($orderId) as $line): ?>
+        <?php foreach ($order->getLines() as $line): ?>
         <tr>
             <td style="border: 1px solid black">
-
                 <?= $line->id?>
             </td>
             <td style="border: 1px solid black">
                 <?= $line->order_id ?>
             </td>
             <td style="border: 1px solid black">
-                <?php $productId = $line->product_id?>
-                <?php $product = new Product();?>
-                <?= $product->getName($productId)?>
+                <?php $productId = $line->product_id ?>
+                <?= Product::getProduct($productId)->name ?>
             </td>
             <td style="border: 1px solid black">
-                <?= $line->quantity ?>
+                <?= $quantity = $line->quantity ?>
             </td>
             <td style="border: 1px solid black">
-                <?= $product->getPrice($productId) ?>
+                <?= $price = Product::getProduct($productId)->price ?>
             </td>
-            <?php endforeach ?>
             <td style="border: 1px solid black">
             </td>
+            <td style="border: 1px solid black">
+                <?php endforeach ?>
+            </td>
+
         </tr>
         <tr>
             <td style="border: 1px solid black">
@@ -70,7 +72,7 @@
             <td style="border: 1px solid black">
             </td>
             <td style="border: 1px solid black">
-                <?= $order = getTotal($orderId) ?>
+                <?= Cart::getTotal() ?>
             </td>
         </tr>
     </table>

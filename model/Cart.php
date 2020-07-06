@@ -2,27 +2,27 @@
 
 class Cart
 {
-  
-    function add(Product $product)
+    public $items =[];
+
+    static function add(Product $product)
     {
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
         }
 
         if (isset($_SESSION['cart'][$product->id])) {
-            $_SESSION['cart'][$product->id]['quantity']++;
+            $_SESSION['cart'][$product->id]->quantity++;
 
         } else {
-            $line = [];
-            $line['quantity'] = 1;
-            $line['id'] = $product->id;
+            $line = new stdClass();
+            $line->quantity = 1;
+            $line->id = $product->id;
             $_SESSION['cart'][$product->id] = $line;
         }
-
         return true;
     }
 
-    function getLines()
+    static function getLines()
     {
         $cartLines = $_SESSION['cart'] ;
 
@@ -30,12 +30,11 @@ class Cart
 
         foreach ($cartLines as $cartLine){
             $line = new CartLine();
-            $line->id = $cartLine['id'];
-            $line->quantity = $cartLine['quantity'];
+            $line->productId = $cartLine->id;
+            $line->quantity = $cartLine->quantity;
 
             $lines[] = $line;
         }
-
         return $lines;
     }
 
@@ -44,4 +43,23 @@ class Cart
         return count($_SESSION['cart']);
     }
 
+    static function getCart()
+    {
+        $cart = $_SESSION['cart'];
+        return $cart;
+    }
+
+    static function getTotal(){
+        $total = 0;
+
+        foreach (Cart::getLines() as $line){
+            $productId = $line->productId;
+            $quantity = $line->quantity;
+            $price = Product::getProduct($productId)->price;
+            $totalLine = $price * $quantity;
+            $total = $total + $totalLine;
+        }
+        return $total;
+    }
 }
+
