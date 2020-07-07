@@ -3,5 +3,6 @@ require('../bootstrap.php');
 
 session_destroy();
 
-header('Location:'.$_SERVER['HTTP_REFERER']);
-exit;
+header("Location: connection.php");
+
+exit();

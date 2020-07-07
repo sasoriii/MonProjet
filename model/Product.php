@@ -33,7 +33,4 @@ class Product
 
         return $product;
     }
-
-
-
 }

@@ -1,6 +1,8 @@
-<?php require('../bootstrap.php');
-session_destroy();
+<?php
+require('../bootstrap.php');
+
 session_start();
+
 $mailConnect = htmlspecialchars($_POST['mailConnect']);
 $mdpConnect = $_POST['mdpConnect'];
 
@@ -21,4 +23,4 @@ if ( ! login($mailConnect, $mdpConnect)) {
 }
 
 header("Location: profil.php?id=" . getUserId());
-
+exit();

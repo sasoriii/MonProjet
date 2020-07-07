@@ -26,8 +26,16 @@
             </td>
         </tr>
         <tr>
+            <td>
+                <a href="../panier/ordersByUser.php">
+                Recap de mes commandes <br>
+                </a>
+                <?= $userId = getUserId()?>
+            </td>
+        </tr>
+        <tr>
             <td >
-                <a href="connection.php">
+                <a href="disconnect.php">
                     Disconnect
                 </a>
             </td>

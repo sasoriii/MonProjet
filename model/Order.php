@@ -7,6 +7,8 @@ class Order
     public $order;
     public $lines = [];
     public $orderLines = [];
+    public $userId;
+    
 
     function toArray()
     {
@@ -19,7 +21,6 @@ class Order
 
         foreach ($lines as $line){
             $lineData = [];
-
             $lineData['id'] = $line->id;
             $lineData['product_id'] = $line->product_id;
             $lineData['quantity'] = $line->quantity;
@@ -105,21 +106,54 @@ class Order
         return $orders;
     }
 
-    function getTotal(){
-        $total = 0;
-
-        foreach (Order::getLines() as $line) {
-            $productId = $line->product_id;
-            $quantity = $line->quantity;
-            $price = Product::getProduct($productId)->price;
-            $totalLine = $price * $quantity;
-            $total = $total + $totalLine;
-        }
-        return $total;
-    }
-
-    function countOrderLines(): int
+    static function getOrdersByUser(): array
     {
-        return count($this->orderLines);
+        $userId = $_SESSION['id'];
+        $sql = "SELECT * FROM `order` WHERE user_id=$userId ORDER BY id";
+        $rows = selectRows($sql);
+
+        $orders = [];
+
+        foreach ($rows as $row) {
+
+            $order = new Order();
+            $order->userId = $_SESSION['id'];
+            $order->id = $row['id'];
+            $order->email = $row['email'];
+            $sql = "SELECT * FROM orderline WHERE order_id=$order->id";
+            $orderlines = selectRows($sql);
+            $order->orderLines = [];
+
+            foreach ($orderlines as $orderline) {
+                $line = new OrderLine();
+                $line->id = $orderline['id'];
+                $line->product_id = $orderline['product_id'];
+                $line->quantity = $orderline['quantity'];
+                $line->order_id = $orderline['order_id'];
+
+                $order->orderLines[] = $line;
+            }
+            $orders[] = $order;
+        }
+        return $orders;
     }
-}
+
+        function getTotal()
+        {
+            $total = 0;
+
+            foreach (Order::getLines() as $line) {
+                $productId = $line->product_id;
+                $quantity = $line->quantity;
+                $price = Product::getProduct($productId)->price;
+                $totalLine = $price * $quantity;
+                $total = $total + $totalLine;
+            }
+            return $total;
+        }
+
+        function countOrderLines(): int
+        {
+            return count($this->orderLines);
+        }
+    }

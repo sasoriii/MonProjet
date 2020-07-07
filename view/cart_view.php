@@ -4,19 +4,29 @@ $cart = new Cart();
 ?>
     <table style="width: 400px">
         <tr>
-            <td colspan="4">Your cart</td>
+            <td colspan="4">
+                Your cart
+            </td>
         </tr>
         <tr>
-            <td>Name</td>
-            <td>Quantity</td>
-            <td>Price for one</td>
+            <td>
+                Name
+            </td>
+            <td>
+                Quantity
+            </td>
+            <td>
+                Price for one
+            </td>
 
         </tr>
 
         <?php $nbArticles = $cart->getNbItems()?>
         <?php if ($nbArticles <= 0): ?>
             <tr>
-                <td>Your cart is empty</td>
+                <td>
+                    Your cart is empty
+                </td>
             </tr>
         <?php endif ?>
 

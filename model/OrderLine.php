@@ -6,5 +6,9 @@ class OrderLine
     public $product_id;
     public $quantity;
     public $order_id;
+    /**
+     * @var mixed
+     */
+    public $userId;
 
 }

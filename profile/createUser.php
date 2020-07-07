@@ -1,4 +1,5 @@
-<?php require('../bootstrap.php');
+<?php
+require('../bootstrap.php');
 
 $pseudo = htmlspecialchars($_POST['pseudo']);
 $mail = htmlspecialchars($_POST['mail']);

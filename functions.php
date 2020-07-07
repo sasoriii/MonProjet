@@ -23,22 +23,23 @@ function createOrder($cart, $email)
 {
 
     $bdd = getConnection();
-    $sth = $bdd->prepare("INSERT INTO `order` (email) VALUES(:email)");
+    $sth = $bdd->prepare("INSERT INTO `order` (email, user_id) VALUES(:email , :user_id )");
     $sth->bindParam(':email', $email);
+    $sth->bindParam(':user_id', $_SESSION['id']);
 
     $sth->execute();
 
     $orderId = $bdd->lastInsertId();
 
     foreach ($cart as $cartLine) {
-        pre($cartLine);
         $bdd = getConnection();
         $sth = $bdd->prepare("
-        INSERT INTO `orderline` (product_id, quantity, order_id)
-        VALUES(:product_id , :product_quantity, :last_id)");
+        INSERT INTO `orderline` (product_id, quantity, order_id, user_id)
+        VALUES(:product_id , :product_quantity, :last_id, :user_id)");
         $sth->bindParam(':product_id', $cartLine->id);
         $sth->bindParam(':product_quantity', $cartLine->quantity);
         $sth->bindParam(':last_id', $orderId);
+        $sth->bindParam(':user_id', $_SESSION['id']);
         $sth->execute();
     }
 
@@ -203,7 +204,7 @@ function view($view, array $vars = null)
 
 function sum(float $x, float $y):float
 {
-    return $x + $y +1 ;
+    return $x + $y + 1 ;
 }
 
 function getUser($pseudo, $mail, $motdepasse)

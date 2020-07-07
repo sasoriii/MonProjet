@@ -64,9 +64,10 @@
         <div class="app-bar-container ml-auto" data-flexdirection="reverse">
         </div>
         <span class="mif-1x mif-user fg-black">
-        <a href="../profile/connection.php">
+        <a href="../profile/isConnect.php">
             Mon compte / connexion
         </a>
+
     </span>
     </div>
 
