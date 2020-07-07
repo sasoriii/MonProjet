@@ -4,6 +4,20 @@ class Cart
 {
     public $items =[];
 
+    protected static $instance;
+
+    protected function __construct() { }
+    protected function __clone() { }
+
+    public static function getInstance() {
+
+        if(is_null(self::$instance)) {
+            self::$instance = new Cart();
+        }
+
+        return self::$instance;
+    }
+
     static function add(Product $product)
     {
         if (!isset($_SESSION['cart'])) {

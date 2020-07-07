@@ -11,14 +11,14 @@
             <tr>
                 <td>
                     <label>
-                        <input type="text" name="mailConnect" placeholder="Mail">
+                        <input type="text" name="emailConnect" placeholder="Email">
                     </label>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>
-                        <input type="password" name="mdpConnect" placeholder="Mot de passe">
+                        <input type="password" name="passwordConnect" placeholder="Password">
                     </label>
                 </td>
             </tr>

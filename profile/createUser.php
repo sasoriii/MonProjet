@@ -2,10 +2,10 @@
 require('../bootstrap.php');
 
 $pseudo = htmlspecialchars($_POST['pseudo']);
-$mail = htmlspecialchars($_POST['mail']);
-$mail2 = htmlspecialchars($_POST['mail2']);
-$mdp = sha1($_POST['mdp']);
-$mdp2 = sha1($_POST['mdp2']);
+$email = htmlspecialchars($_POST['email']);
+$email2 = htmlspecialchars($_POST['email2']);
+$password = sha1($_POST['password']);
+$password2 = sha1($_POST['password2']);
 
 if ( ! isset($_POST['formInscription'])){
     throw new Exception("missing form");
@@ -15,36 +15,36 @@ if ( ! isPseudoValid($_POST['pseudo'])){
     throw new Exception("Pseudo invalid");
 }
 
-if (empty($_POST['mail'])){
-    throw new Exception("mail vide");
+if (empty($_POST['email'])){
+    throw new Exception("email vide");
 }
-if (! isEmailAvailable($_POST['mail'])) {
-    throw new Exception("mail invalid");
-}
-
-if (empty($_POST['mail2'])){
-    throw new Exception("mail 2 vide");
-}
-if (! isEmailAvailable($_POST['mail2'])){
-    throw new Exception("mail2 invalid");
+if (! isEmailAvailable($_POST['email'])) {
+    throw new Exception("email invalid");
 }
 
-if (($_POST['mail']) != ($_POST['mail2'])){
-    throw new Exception("mail diff de mail2");
+if (empty($_POST['email2'])){
+    throw new Exception("email 2 vide");
+}
+if (! isEmailAvailable($_POST['email2'])){
+    throw new Exception("email2 invalid");
 }
 
-if ( empty($_POST['mdp'])){
+if (($_POST['email']) != ($_POST['email2'])){
+    throw new Exception("email diff de mail2");
+}
+
+if ( empty($_POST['password'])){
     throw new Exception("mdp vide");
 }
 
-if ( empty($_POST['mdp2'])){
+if ( empty($_POST['password2'])){
     throw new Exception("mdp vide2");
 }
 
-if (($_POST['mdp']) != ($_POST['mdp2'])){
+if (($_POST['password']) != ($_POST['password2'])){
     throw new Exception("mdp diff mdp 2");
 }
 
-createUser($pseudo, $mail, $mdp);
+createUser($pseudo, $email, $password);
 
 header("Location: /profile/connection.php");

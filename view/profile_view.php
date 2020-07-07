@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <td>
-                Mail : <?= $userinfo['mail'] ?>
+                Mail : <?= $userinfo['email'] ?>
             </td>
         </tr>
         <tr>

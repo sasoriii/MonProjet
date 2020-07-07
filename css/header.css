@@ -4,7 +4,7 @@
 }
 .homeLogoImg{
 	height: 6vmin;
-	width: 12vmin;
+	width: 10vmin;
 }
 .dropdown-toggle::before {
 	border-color: rgba(0,0,0,0); !important;

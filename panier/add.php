@@ -1,11 +1,13 @@
 <?php
 require('../bootstrap.php');
 
+$cart = Cart::getInstance();
+
 $productId = $_GET['product_id'];
 
 $product = Product::getProduct($productId);
 
-Cart::add($product);
+$cart->add($product);
 
 if (isset($_SESSION['id'])){
     header('Location: /panier/cart.php');

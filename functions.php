@@ -128,7 +128,7 @@ function pre($var)
 function getProfile(int $id)
 {
     $pdo = getConnection();
-    $request = $pdo->prepare('SELECT * FROM espace_membre WHERE id = ?');
+    $request = $pdo->prepare('SELECT * FROM `user` WHERE id = ?');
     $request->execute(array($id));
     $userInfo = $request->fetch();
 
@@ -140,7 +140,7 @@ function login($email, $password)
     $password = sha1($password);
 
     $pdo = getConnection();
-    $request = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ? AND motdepasse = ?");
+    $request = $pdo->prepare("SELECT * FROM `user` WHERE email = ? AND password = ?");
     $request->execute(array($email, $password));
 
     $userInfo = $request->fetch();
@@ -150,18 +150,18 @@ function login($email, $password)
 
     $_SESSION['id'] = $userInfo['id'];
     $_SESSION['pseudo'] = $userInfo['pseudo'];
-    $_SESSION['mail'] = $userInfo['mail'];
+    $_SESSION['email'] = $userInfo['email'];
 
     return true;
 }
 
-function isEmailAvailable($mail)
+function isEmailAvailable($email)
 {
     $pdo = getConnection();
-    $requestMail = $pdo->prepare("SELECT * FROM espace_membre WHERE mail = ?");
-    $requestMail->execute(array($mail));
+    $requestEmail = $pdo->prepare("SELECT * FROM `user` WHERE email = ?");
+    $requestEmail->execute(array($email));
 
-    return $requestMail->rowCount() == 0;
+    return $requestEmail->rowCount() == 0;
 }
 
 function isPseudoValid(string $pseudo):bool
@@ -180,11 +180,11 @@ function isPseudoValid(string $pseudo):bool
     }
 }
 
-function createUser($pseudo, $mail, $mdp)
+function createUser($pseudo, $email, $password)
 {
     $pdo = getConnection();
-    $insertMember = $pdo->prepare("INSERT INTO espace_membre(pseudo, mail, motdepasse) VALUES(?, ?, ?)");
-    $insertMember->execute(array($pseudo, $mail, $mdp));
+    $insertMember = $pdo->prepare("INSERT INTO `user`(pseudo, email, password) VALUES(?, ?, ?)");
+    $insertMember->execute(array($pseudo, $email, $password));
 }
 
 function getUserId()
@@ -207,11 +207,11 @@ function sum(float $x, float $y):float
     return $x + $y + 1 ;
 }
 
-function getUser($pseudo, $mail, $motdepasse)
+function getUser($pseudo, $email, $password)
 {
     $pdo = getConnection();
-    $request = $pdo->prepare("SELECT * FROM espace_membre WHERE pseudo = ? AND mail = ? AND motdepasse = ?");
-    $request->execute(array($pseudo , $mail, $motdepasse));
+    $request = $pdo->prepare("SELECT * FROM espace_membre WHERE pseudo = ? AND email = ? AND password = ?");
+    $request->execute(array($pseudo , $email, $password));
     return $request->rowCount() == 0;
 }
 

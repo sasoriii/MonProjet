@@ -20,42 +20,42 @@
             </tr>
             <tr>
                 <td>
-                    <label for="mail">
+                    <label for="email">
                         Mail :
                     </label>
                 </td>
                 <td>
-                    <input type="email" placeholder="Your mail" id="mail" name="mail"/>
+                    <input type="email" placeholder="Your mail" id="email" name="email"/>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="mail2">
+                    <label for="email2">
                         Confirmation du mail :
                     </label>
                 </td>
                 <td>
-                    <input type="email" placeholder="Confirm your mail" id="mail2" name="mail2"/>
+                    <input type="email" placeholder="Confirm your mail" id="email2" name="email2"/>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="mdp">
+                    <label for="password">
                         Mot de passe :mail
                     </label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Your password" id="mdp" name="mdp"/>
+                    <input type="password" placeholder="Your password" id="password" name="password"/>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label for="mdp2">
+                    <label for="password2">
                         Confirm your password :
                     </label>
                 </td>
                 <td>
-                    <input type="password" placeholder="Confirm your password" id="mdp2" name="mdp2"/>
+                    <input type="password" placeholder="Confirm your password" id="password2" name="password2"/>
                 </td>
             </tr>
             <tr>

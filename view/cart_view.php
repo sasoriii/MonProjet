@@ -1,6 +1,6 @@
 <?php include_once "../css/header.php"; ?>
 <?php
-$cart = new Cart();
+$cart = Cart::getInstance();
 ?>
     <table style="width: 400px">
         <tr>
