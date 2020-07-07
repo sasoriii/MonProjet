@@ -1,4 +1,5 @@
 <?php include_once "../css/header.php"; ?>
+
 <?php
 $cart = Cart::getInstance();
 ?>
