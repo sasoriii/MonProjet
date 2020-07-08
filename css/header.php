@@ -47,7 +47,7 @@
         </ul>
         <ul>
             <li>
-                <a href="../panier/isCart.php">
+                <a href="../panier/cart.php">
                     Panier
                 </a>
             </li>

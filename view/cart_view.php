@@ -22,33 +22,34 @@ $cart = Cart::getInstance();
 
         </tr>
 
-        <?php $nbArticles = $cart->getNbItems()?>
-        <?php if ($nbArticles <= 0): ?>
-            <tr>
-                <td>
-                    Your cart is empty
-                </td>
-            </tr>
+        <?php if(isset($_SESSION['cart'])): ?>
+            <?php if ($_SESSION['cart'] == NULL || $_SESSION['cart'] == []) : ?>
+                <tr>
+                    <td>
+                        Your cart is empty
+                    </td>
+                </tr>
+
+
+            <?php else: ?>
+
+            <?php foreach ($cart->getLines() as $line): ?>
+                <tr>
+                    <td>
+                        <?php $id = $line->productId ?>
+                        <?= Product::getProduct($id)->name ?>
+                    </td>
+                    <td>
+                        <?= $line->quantity ?>
+                    </td>
+                    <td>
+                        <?= Product::getProduct($id)->price ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+
+            <?php endif ?>
         <?php endif ?>
-
-        <?php
-
-        ?>
-
-        <?php foreach ($cart->getLines() as $line): ?>
-            <tr>
-                <td>
-                    <?php $id = $line->productId ?>
-                    <?= Product::getProduct($id)->name ?>
-                </td>
-                <td>
-                    <?= $line->quantity ?>
-                </td>
-                <td>
-                    <?= Product::getProduct($id)->price ?>
-                </td>
-            </tr>
-        <?php endforeach ?>
     </table>
     <div>
         <a href="form.php">
