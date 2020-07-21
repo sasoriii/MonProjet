@@ -2,7 +2,7 @@
 $testing = '';
 require('../bootstrap.php');
 
-//session_start();
+session_start();
 
 $emailConnect = htmlspecialchars($_POST['emailConnect']);
 $passwordConnect = $_POST['passwordConnect'];

@@ -138,7 +138,7 @@ class Order
         return $orders;
     }
 
-        function getTotal()
+        static function getTotal()
         {
             $total = 0;
 
@@ -150,10 +150,5 @@ class Order
                 $total = $total + $totalLine;
             }
             return $total;
-        }
-
-        function countOrderLines(): int
-        {
-            return count($this->orderLines);
         }
     }

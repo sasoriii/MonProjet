@@ -2,7 +2,6 @@
 
 class Database
 {
-
     private $PDOInstance = null;
 
     protected static $instance;

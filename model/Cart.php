@@ -2,8 +2,6 @@
 
 class Cart
 {
-    public $items =[];
-
     protected static $instance;
 
     protected function __construct() { }
@@ -50,11 +48,6 @@ class Cart
             $lines[] = $line;
         }
         return $lines;
-    }
-
-    function getNbItems()
-    {
-        return count($_SESSION['cart']);
     }
 
     static function getCart()

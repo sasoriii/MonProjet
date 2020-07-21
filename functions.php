@@ -1,5 +1,5 @@
 <?php
-/*function getProducts()
+function getProducts()
 {
     $bdd = getConnection();
     $response = $bdd->query('SELECT * FROM product');
@@ -17,7 +17,7 @@
         $listProduct[] = $product;
     }
     return $listProduct;
-}*/
+}
 
 function createOrder($cart, $email)
 {
