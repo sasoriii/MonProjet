@@ -1,9 +1,14 @@
 <?php
-require(__DIR__ . '/../bootstrap.php');
+$cart = Cart::getInstance();
 
-addToCart(1);
-addToCart(3);
-addToCart(1);
-addToCart(50);
+$productId = 2;
 
-pre($_SESSION);
+$product = Product::getProduct($productId);
+
+$cart->add($product);
+
+if (!isset($_SESSION['cart']['2'])){
+    throw new Exception("error");
+}
+
+

@@ -4,25 +4,20 @@ require('../bootstrap.php');
 
 if (!empty($_GET['id'])){
     $orderId = $_GET['id'];
-    $orders = getOrder($orderId);
+    $orders = Order::getOrder($orderId);
 
     if (empty($orders)){
         throw new Exception("error");
     }
     $list = [];
 
-    foreach ($orders as $order) {
-        $list[] = $order->toArray();
-    }
+    $list[] = $orders->toArray();
 
     echo json_encode($list, JSON_PRETTY_PRINT);
 }
 
 else {
-    $orders = getOrders();
-
-
-
+    $orders = Order::getOrders();
 
     $list = [];
 

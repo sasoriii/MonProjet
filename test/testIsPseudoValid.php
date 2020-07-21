@@ -1,15 +1,14 @@
 <?php
-require(__DIR__ . '/../bootstrap.php');
-
 $pseudo = "";
 
 $result = isPseudoValid($pseudo);
+
 
 if ($result !== false) {
     throw new Exception("error");
 }
 
-$pseudo = "toto";
+$pseudo = "aa";
 
 $result = isPseudoValid($pseudo);
 
@@ -24,4 +23,3 @@ $result = isPseudoValid($pseudo);
 if ($result !== false) {
     throw new Exception("error");
 }
-

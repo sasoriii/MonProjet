@@ -1,6 +1,6 @@
 <?php
 
-class Database{
+class Databasej{
     private $db_name;
     private $db_user;
     private $db_pass;
@@ -45,5 +45,5 @@ class Database{
 
 }
 
-$connect = new Database;
+$connect = new Databasej;
 $connect->query();

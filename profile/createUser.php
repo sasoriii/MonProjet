@@ -1,4 +1,5 @@
 <?php
+$testing = '';
 require('../bootstrap.php');
 
 $pseudo = htmlspecialchars($_POST['pseudo']);

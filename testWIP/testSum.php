@@ -1,5 +1,6 @@
 <?php
 namespace PHPUnit\Framework;
+$testing = 'testing';
 require(__DIR__ . '/../bootstrap.php');
 
 

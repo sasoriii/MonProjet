@@ -1,4 +1,6 @@
-<?php require('../bootstrap.php');
+<?php
+$testing = 'testing';
+require('../bootstrap.php');
 
 $orderId = 1;
 $lines = getLines($orderId);

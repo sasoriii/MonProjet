@@ -1,8 +1,6 @@
 <?php
-require(__DIR__ . '/../bootstrap.php');
-
-$email = "zkkl@gmail.com";
-$password = "zkl";
+$email = "test@gmail.com";
+$password = "test";
 
 $result = login($email, $password);
 

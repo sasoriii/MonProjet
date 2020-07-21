@@ -1,3 +1,12 @@
-<?php require('../bootstrap.php');
+<?php
+$cart = Cart::getCart();
 
-createOrder();
+$email = "testcrevvvvvvvvvvvateorder" ;
+
+$orderId = createOrder($cart, $email);
+
+$isOrderCreated = isOrderCreated($email);
+
+if (!empty($isOrderCreated)){
+    throw new Exception("error");
+}

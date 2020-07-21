@@ -1,5 +1,5 @@
 <?php
-function getProducts()
+/*function getProducts()
 {
     $bdd = getConnection();
     $response = $bdd->query('SELECT * FROM product');
@@ -17,7 +17,7 @@ function getProducts()
         $listProduct[] = $product;
     }
     return $listProduct;
-}
+}*/
 
 function createOrder($cart, $email)
 {
@@ -110,7 +110,14 @@ function selectOneRow(string $sql): ?array
 
 function getConnection()
 {
-    $pdo = new PDO('mysql:host=localhost;dbname=holywind_db;charset=utf8', 'holywindtest', 'holywindmdp');
+    $db = Database::getInstance();
+
+    return $db;
+}
+
+function getConnectionToTest()
+{
+    $pdo = new PDO('mysql:host=localhost;dbname=holywind_db_test;charset=utf8', 'holywindtest', 'holywindmdp');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
@@ -210,7 +217,7 @@ function sum(float $x, float $y):float
 function getUser($pseudo, $email, $password)
 {
     $pdo = getConnection();
-    $request = $pdo->prepare("SELECT * FROM espace_membre WHERE pseudo = ? AND email = ? AND password = ?");
+    $request = $pdo->prepare("SELECT * FROM `user` WHERE pseudo = ? AND email = ? AND password = ?");
     $request->execute(array($pseudo , $email, $password));
     return $request->rowCount() == 0;
 }
@@ -248,4 +255,11 @@ function getRandomMail($n) {
         $randomString .= $characters[$index] ;
     }
     return $randomString;
+}
+
+function isOrderCreated(){
+    $id = 113;
+    $sql = "SELECT * FROM `order` WHERE id=$id";
+    $rows = selectRows($sql);
+    return $rows;
 }

@@ -1,17 +1,14 @@
 <?php
-require(__DIR__ . '/../bootstrap.php');
-
-$id = 27 ;
+$id = 5 ;
 
 $result = getProfile($id);
-pre($result["pseudo"]);
-if ($result['pseudo'] !== "z" ) {
+
+if ($result['pseudo'] !== "test" ) {
     throw new Exception("error");
 }
 
-if ($result['motdepasse'] !== "z" ) {
+if ($result['email'] !== "test@gmail.com" ) {
     throw new Exception("error");
 }
-if ($result['mail'] !== "z@gmail.com" ) {
-    throw new Exception("error");
-}
+
+?>

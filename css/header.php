@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li>
-                <a href="../test/chat/chat.php">
+                <a href="../testWIP/chat/chat.php">
                     Chat
                 </a>
             </li>

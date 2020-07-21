@@ -11,9 +11,12 @@ class Product
 
     static function getProduct($id, $throw = false)
     {
+        $db = Database::getInstance();
+
         $sql = "SELECT * FROM product WHERE id = $id";
 
-        $row = selectOneRow($sql);
+        $row = $db->selectOneRow($sql);
+
 
         if ($throw && !$row) {
             throw new Exception("product not exist");

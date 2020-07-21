@@ -52,14 +52,14 @@ class Order
     static function getOrder($orderId): Order
     {
         $sql = "SELECT * FROM `order` WHERE id=$orderId";
-        $row = selectOneRow($sql);
+        $row = Database::getInstance()->selectOneRow($sql);
 
         $order = new Order();
         $order->id = $row['id'];
         $order->email = $row['email'];
 
         $sql = "SELECT * FROM orderline WHERE order_id=$orderId";
-        $rows = selectRows($sql);
+        $rows = Database::getInstance()->selectRows($sql);
 
         $order->orderLines = [];
 

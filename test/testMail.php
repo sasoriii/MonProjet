@@ -1,7 +1,5 @@
 <?php
-require(__DIR__ . '/../bootstrap.php');
-
-$mail= "jeremy@gmail.com";
+$mail= "test@gmail.com";
 
 $result = isEmailAvailable($mail);
 
@@ -13,6 +11,6 @@ $mail= " ";
 
 $result = isEmailAvailable($mail);
 
-if ($result !== false) {
+if ($result !== true) {
     throw new Exception("error");
 }

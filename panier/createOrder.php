@@ -1,4 +1,5 @@
 <?php
+$testing = '';
 require('../bootstrap.php');
 
 $cart = Cart::getCart();
