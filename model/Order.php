@@ -138,17 +138,17 @@ class Order
         return $orders;
     }
 
-        static function getTotal()
-        {
-            $total = 0;
+    static function getTotal()
+    {
+        $total = 0;
 
-            foreach (Order::getLines() as $line) {
-                $productId = $line->product_id;
-                $quantity = $line->quantity;
-                $price = Product::getProduct($productId)->price;
-                $totalLine = $price * $quantity;
-                $total = $total + $totalLine;
-            }
-            return $total;
+        foreach (Order::getLines() as $line) {
+            $productId = $line->product_id;
+            $quantity = $line->quantity;
+            $price = Product::getProduct($productId)->price;
+            $totalLine = $price * $quantity;
+            $total = $total + $totalLine;
         }
+        return $total;
     }
+}

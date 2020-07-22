@@ -7,8 +7,8 @@ class Cart
     protected function __construct() { }
     protected function __clone() { }
 
-    public static function getInstance() {
-
+    public static function getInstance()
+    {
         if(is_null(self::$instance)) {
             self::$instance = new self();
         }

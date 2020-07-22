@@ -6,21 +6,28 @@ class Database
 
     protected static $instance;
 
-    protected function __construct() {
+    protected function __construct()
+    {
         if (ENV == 'prod') {
-            $dbName = "holywind_db";
+            $config = Config::getInstance();
+            $dbName = $config->get('db_name');
+            $dbUsername = $config->get('db_username');
+            $dbPassword = $config->get('db_password');
         } else if (ENV == 'testing') {
-            $dbName = "holywind_db_test";
+            $config = Config::getInstance();
+            $dbName = $config->get('db_name');
+            $dbUsername = $config->get('db_username');
+            $dbPassword = $config->get('db_password');
         } else {
             throw new \Exception("incorrect env " . ENV);
         }
-        $this->PDOInstance = new PDO("mysql:host=localhost;dbname=$dbName;charset=utf8", 'holywindtest', 'holywindmdp');
+        $this->PDOInstance = new PDO("mysql:host=localhost;dbname=$dbName;charset=utf8", $dbUsername, $dbPassword);
     }
 
     protected function __clone() { }
 
-    public static function getInstance() {
-
+    public static function getInstance()
+    {
         if(is_null(self::$instance)) {
             self::$instance = new self();
         }
