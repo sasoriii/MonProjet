@@ -8,7 +8,7 @@ class Config
 
     protected function __construct()
     {
-        $this->conf = require('../config/' . ENV . '.php');
+        $this->conf = require(__DIR__ . '/../config/' . ENV . '.php');
     }
 
     protected function __clone() { }
