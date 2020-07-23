@@ -151,4 +151,11 @@ class Order
         }
         return $total;
     }
+
+    function countOrderLines()
+    {
+        $sql = "SELECT COUNT(orderline_id)  AS cnt FROM orderline WHERE order_id=$this->id";
+        $line = Database::selectOneRow($sql);
+        return $line['cnt'];
+    }
 }

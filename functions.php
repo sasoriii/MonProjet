@@ -51,41 +51,6 @@ function getCart()
     return $_SESSION['cart'];
 }
 
-function getOrder($orderId)
-{
-    $sql = "SELECT * FROM `order` WHERE id=$orderId";
-    $rows = selectRows($sql);
-    $lines = [];
-
-    foreach ($rows as $row){
-        $line = new Order();
-        $line->id = $row['id'];
-        $line->email = $row['email'];
-
-        $lines[] = $line;
-    }
-
-    return $lines;
-}
-
-function getOrders()
-{
-    $sql = "SELECT * FROM `order` ORDER BY id";
-    $rows = selectRows($sql);
-
-    $lines = [];
-
-    foreach ($rows as $row){
-        $line = new Order();
-        $line->id = $row['id'];
-        $line->email = $row['email'];
-
-        $lines[] = $line;
-    }
-
-    return $lines;
-}
-
 function selectRows($sql): ?array
 {
     $connection = getConnection();
@@ -97,31 +62,11 @@ function selectRows($sql): ?array
     return $rows;
 }
 
-function selectOneRow(string $sql): ?array
-{
-    $connection = getConnection();
-    $sth = $connection->prepare($sql);
-    $sth->execute();
-
-    $row = $sth->fetch();
-
-    return $row ?: null;
-}
-
 function getConnection()
 {
     $db = Database::getInstance();
 
     return $db;
-}
-
-function getConnectionToTest()
-{
-    $pdo = new PDO('mysql:host=localhost;dbname=holywind_db_test;charset=utf8', 'holywindtest', 'holywindmdp');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-    return $pdo;
 }
 
 function pre($var)
@@ -140,6 +85,13 @@ function getProfile(int $id)
     $userInfo = $request->fetch();
 
     return $userInfo;
+}
+
+function countOrderLines(int $orderId): int
+{
+    $sql = "SELECT COUNT(orderline_id)  AS cnt FROM orderline WHERE order_id=$orderId";
+    $line = selectOneRow($sql);
+    return $line['cnt'];
 }
 
 function login($email, $password)

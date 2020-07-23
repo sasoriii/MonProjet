@@ -1,18 +1,37 @@
+-- --------------------------------------------------------
+-- Hôte :                        127.0.0.1
+-- Version du serveur:           8.0.20-0ubuntu0.20.04.1 - (Ubuntu)
+-- SE du serveur:                Linux
+-- HeidiSQL Version:             11.0.0.5919
+-- --------------------------------------------------------
 
-CREATE DATABASE IF NOT EXISTS `holywind_db_test` ;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Listage de la structure de la base pour holywind_db_test
+CREATE DATABASE IF NOT EXISTS `holywind_db_test` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `holywind_db_test`;
 
+-- Listage de la structure de la table holywind_db_test. order
 CREATE TABLE IF NOT EXISTS `order` (
-  `email` varchar(50) DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=625 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=626 DEFAULT CHARSET=utf8;
 
-
+-- Listage des données de la table holywind_db_test.order : ~579 rows (environ)
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`email`, `user_id`, `id`) VALUES
-	('testcreateorder', 94, 1);
+	('testcreateorder', 94, 1),
+	('testcrevvvvvvvvvvvateorder', NULL, 625);
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
+-- Listage de la structure de la table holywind_db_test. orderline
 CREATE TABLE IF NOT EXISTS `orderline` (
   `id` int NOT NULL AUTO_INCREMENT,
   `product_id` int DEFAULT NULL,
@@ -20,37 +39,45 @@ CREATE TABLE IF NOT EXISTS `orderline` (
   `quantity` int DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=635 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=636 DEFAULT CHARSET=utf8;
 
-
+-- Listage des données de la table holywind_db_test.orderline : ~593 rows (environ)
+/*!40000 ALTER TABLE `orderline` DISABLE KEYS */;
 INSERT INTO `orderline` (`id`, `product_id`, `order_id`, `quantity`, `user_id`) VALUES
-	(1, 1, 1, 2, 94);
+	(1, 1, 1, 2, 94),
+	(635, 2, 625, 1, NULL);
+/*!40000 ALTER TABLE `orderline` ENABLE KEYS */;
 
+-- Listage de la structure de la table holywind_db_test. product
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `price` decimal(6,2) DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `quantity` varchar(10) DEFAULT NULL,
-  `img` varchar(255) DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `quantity` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `img` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-
+-- Listage des données de la table holywind_db_test.product : ~3 rows (environ)
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` (`id`, `name`, `price`, `description`, `quantity`, `img`) VALUES
 	(1, 'Cabrinha FX 10m2 2020', 900.00, 'freestyle', '50', 'fx.png'),
 	(2, 'Cabrinha drifter 12m2 2020', 950.00, 'freeride', '49', 'drifter.png'),
 	(3, 'Cabrinha moto 11m2 2020', 850.00, 'debutant', '48', 'moto.png');
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
+-- Listage de la structure de la table holywind_db_test. user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `pseudo` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `pseudo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=626 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=627 DEFAULT CHARSET=utf8;
 
-
+-- Listage des données de la table holywind_db_test.user : ~71 rows (environ)
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `pseudo`, `password`, `email`) VALUES
 	(1, 'dcTgRqFaRE', '7jqNWHMuY0', 'TXljPNjXKj@gmail.com'),
 	(2, 'qbWUqTlHve', 'dBnPzdUIXa', 'YuKcZTfRPf@gmail.com'),
@@ -128,4 +155,10 @@ INSERT INTO `user` (`id`, `pseudo`, `password`, `email`) VALUES
 	(622, 'zIqoyqCwLC', 'eRCmTtqxVQ', 'HgqWHFszqb@gmail.com'),
 	(623, 'fro', 'a924a6bad2bca34c9fa59916cdca897b0c9433ba', 'fro@gmail.com'),
 	(624, 'yjmpduEhGF', 'yRXz4N9CC5', 'jVzNFJobam@gmail.com'),
-	(625, 'Ixe', '1HqRIt63Uz', 'HtmXozVcyT@gmail.com');
+	(625, 'qBLpodJIxe', '1HqRIt63Uz', 'HtmXozVcyT@gmail.com'),
+	(626, 'XKeYUgopJH', '1FMcBHupoM', 'vsDzLedDod@gmail.com');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
