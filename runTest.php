@@ -18,7 +18,7 @@ foreach ($files as $file) {
     } catch (Exception $e){
         $pdo->rollBack();
         $report->add(['file'=>$file,'error'=>$e]);
-        $report->print($report);
+        $report->print();
     }
 }
 ?>

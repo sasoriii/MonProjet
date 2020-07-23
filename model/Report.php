@@ -3,9 +3,9 @@ class Report {
 
     public $report = [];
 
-    public function print($report)
+    public function print()
     {
-        $this->print($report);
+        print_r($this->report);
     }
 
     public function add($file)
