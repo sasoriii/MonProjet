@@ -11,11 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
--- Listage de la structure de la base pour holywind_db_test
-CREATE DATABASE IF NOT EXISTS `holywind_db_test` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `holywind_db_test`;
-
 -- Listage de la structure de la table holywind_db_test. order
 CREATE TABLE IF NOT EXISTS `order` (
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
@@ -24,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=626 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table holywind_db_test.order : ~579 rows (environ)
+-- Listage des données de la table holywind_db_test.order : ~2 rows (environ)
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`email`, `user_id`, `id`) VALUES
 	('testcreateorder', 94, 1),
@@ -41,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `orderline` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=636 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table holywind_db_test.orderline : ~593 rows (environ)
+-- Listage des données de la table holywind_db_test.orderline : ~2 rows (environ)
 /*!40000 ALTER TABLE `orderline` DISABLE KEYS */;
 INSERT INTO `orderline` (`id`, `product_id`, `order_id`, `quantity`, `user_id`) VALUES
 	(1, 1, 1, 2, 94),
@@ -76,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=627 DEFAULT CHARSET=utf8;
 
--- Listage des données de la table holywind_db_test.user : ~71 rows (environ)
+-- Listage des données de la table holywind_db_test.user : ~78 rows (environ)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `pseudo`, `password`, `email`) VALUES
 	(1, 'dcTgRqFaRE', '7jqNWHMuY0', 'TXljPNjXKj@gmail.com'),
