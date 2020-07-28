@@ -8,4 +8,4 @@ $email = $_POST['email'];
 
 $orderId = createOrder($cart, $email);
 
-header("Location: /panier/purchaseOrder.php?id=$orderId") ;
+header("Location: ../?controller=bon_de_commande&id=$orderId") ;

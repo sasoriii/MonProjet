@@ -62,6 +62,17 @@ function selectRows($sql): ?array
     return $rows;
 }
 
+function selectOneRow($sql)
+{
+    $connection = getConnection();
+    $sth = $connection->prepare($sql);
+    $sth->execute();
+
+    $rows = $sth->fetch();
+
+    return $rows;
+}
+
 function getConnection()
 {
     $db = Database::getInstance();

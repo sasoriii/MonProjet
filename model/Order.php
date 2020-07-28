@@ -138,7 +138,7 @@ class Order
         return $orders;
     }
 
-    static function getTotal()
+    function getTotal()
     {
         $total = 0;
 
@@ -155,7 +155,7 @@ class Order
     function countOrderLines()
     {
         $sql = "SELECT COUNT(orderline_id)  AS cnt FROM orderline WHERE order_id=$this->id";
-        $line = Database::selectOneRow($sql);
+        $line = selectOneRow($sql);
         return $line['cnt'];
     }
 }

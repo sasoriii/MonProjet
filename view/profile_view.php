@@ -4,18 +4,18 @@
  */
 
 ?>
-<?php include_once "../css/header.php"; ?>
+<?php include_once "css/header.php"; ?>
 
 <table>
     <div>
         <tr>
             <td>
-                Profile of <?= $userinfo['pseudo'] ?>
+                Profile of <?= $_SESSION['pseudo'] ?>
             </td>
         </tr>
         <tr>
             <td>
-                Mail : <?= $userinfo['email'] ?>
+                Mail : <?= $_SESSION['email'] ?>
             </td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td>
-                <a href="../panier/ordersByUser.php">
+                <a href="../?controller=commandes_par_utilisateur">
                 Recap de mes commandes <br>
                 </a>
                 <?= $userId = getUserId()?>
@@ -35,7 +35,7 @@
         </tr>
         <tr>
             <td >
-                <a href="disconnect.php">
+                <a href="../profile/disconnect.php">
                     Disconnect
                 </a>
             </td>
@@ -43,5 +43,5 @@
     </div>
 </table>
 
-<?php include_once "../css/footer.php"; ?>
+<?php include_once "css/footer.php"; ?>
 

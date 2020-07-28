@@ -1,5 +1,5 @@
 <?php
-include_once "../css/header.php";
+include_once "css/header.php";
 $orders = Order::getOrders();
 ?>
 
@@ -26,13 +26,13 @@ $orders = Order::getOrders();
                     <?= $orderId = $order->id; ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <?= $order->countOrderLines(); ?>
+                    <?= count($order->getLines());?>
                 </td>
                 <td style="border: 1px solid black">
                     <?= $order->getTotal(); ?>
                 </td>
                 <td style="border: 1px solid black">
-                    <a href="purchaseOrder.php?id=<?=$order->id?>">
+                    <a href="../?controller=bon_de_commande&id=<?=$order->id?>">
                         details
                     </a>
                 </td>
@@ -42,5 +42,5 @@ $orders = Order::getOrders();
     </table>
 </main>
 
-<?php include_once "../css/footer.php"; ?>
+<?php include_once "css/footer.php"; ?>
 

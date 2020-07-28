@@ -3,9 +3,9 @@ $testing = '';
 require('../bootstrap.php');
 
 if (isset($_SESSION['id'])){
-    header("Location: ../profile/profil.php?id=" . getUserId());
+    header("Location: ../?controller=profil&id=" . getUserId());
 }
 else{
-    header('Location: ../profile/connection.php');
+    header('Location: ../?controller=connection');
 }
 exit;

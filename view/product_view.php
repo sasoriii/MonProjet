@@ -1,4 +1,4 @@
-<?php include_once "../css/header.php"; ?>
+<?php include_once "css/header.php"; ?>
 
 <main>
 
@@ -24,4 +24,4 @@
 
 </main>
 
-<?php include_once "../css/footer.php"; ?>
+<?php include_once "css/footer.php"; ?>

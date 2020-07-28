@@ -60,11 +60,13 @@ class Cart
         $total = 0;
 
         foreach (Cart::getLines() as $line){
+            pre($total);
             $productId = $line->productId;
             $quantity = $line->quantity;
             $price = Product::getProduct($productId)->price;
             $totalLine = $price * $quantity;
             $total = $total + $totalLine;
+
         }
         return $total;
     }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        Holywinmmmd
+        Holywind
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
@@ -27,7 +27,7 @@
             </li>
 
             <li>
-                <a href="../shop/product.php">
+                <a href="../?controller=produit">
                     Boutique
                 </a>
             </li>
@@ -47,7 +47,7 @@
         </ul>
         <ul>
             <li>
-                <a href="../panier/cart.php">
+                <a href="../?controller=panier">
                     Panier
                 </a>
             </li>

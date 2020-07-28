@@ -1,4 +1,4 @@
-<?php include_once "../css/header.php"; ?>
+<?php include_once "css/header.php"; ?>
 
 <?php
 $cart = Cart::getInstance();
@@ -52,9 +52,9 @@ $cart = Cart::getInstance();
         <?php endif ?>
     </table>
     <div>
-        <a href="form.php">
+        <a href="../?controller=formulaire">
             Next
         </a>
     </div>
 
-<?php include_once "../css/footer.php"; ?>
+<?php include_once "css/footer.php"; ?>

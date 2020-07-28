@@ -23,5 +23,6 @@ if ( ! login($emailConnect, $passwordConnect)) {
     throw new Exception("Login ou mot de passe incorrect");
 }
 
-header("Location: profil.php?id=" . getUserId());
+header("Location: ../?controller=profil&id=" . getUserId());
+
 exit();

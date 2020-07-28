@@ -4,6 +4,6 @@ require('../bootstrap.php');
 
 session_destroy();
 
-header("Location: connection.php");
+header("Location: ../?controller=connection");
 
 exit();

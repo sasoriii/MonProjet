@@ -11,9 +11,9 @@ $product = Product::getProduct($productId);
 $cart->add($product);
 
 if (isset($_SESSION['id'])){
-    header('Location: /panier/cart.php');
+    header('Location: ../?controller=panier');
 }
 else{
-    header('Location: /profile/connection.php');
+    header('Location: ../?controller=connection');
 }
 exit;

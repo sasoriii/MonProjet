@@ -1,4 +1,4 @@
-<?php include_once "../css/header.php"; ?>
+<?php include_once "css/header.php"; ?>
 
 <div>
     <h2>
@@ -6,7 +6,7 @@
     </h2>
     <br/>
     <br/>
-    <form method="POST" action="createUser.php">
+    <form method="POST" action="../profile/createUser.php">
         <table>
             <tr>
                 <td>
@@ -72,7 +72,7 @@
                 </td>
                 <td>
                     <br/>
-                    <a href="connection.php">
+                    <a href="../?controller=connection">
                         Connect
                     </a>
                 </td>
@@ -81,5 +81,5 @@
     </form>
 </div>
 
-<?php include_once "../css/footer.php"; ?>
+<?php include_once "css/footer.php"; ?>
 

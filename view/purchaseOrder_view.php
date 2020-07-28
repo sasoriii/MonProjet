@@ -2,10 +2,10 @@
 /**
  * @var $orderId
  */
-
+$orderId = $_GET['id'];
 $order = Order::getOrder($orderId);
 ?>
-<?php include_once "../css/header.php"; ?>
+<?php include_once "css/header.php"; ?>
 
 <main>
     <h1 class="text-center">
@@ -55,6 +55,7 @@ $order = Order::getOrder($orderId);
                 <?= $price = Product::getProduct($productId)->price ?>
             </td>
             <td style="border: 1px solid black">
+
             </td>
             <td style="border: 1px solid black">
                 <?php endforeach ?>
@@ -73,17 +74,17 @@ $order = Order::getOrder($orderId);
             <td style="border: 1px solid black">
             </td>
             <td style="border: 1px solid black">
-                <?= Cart::getTotal() ?>
+                <?= $order->getTotal() ?>
             </td>
         </tr>
     </table>
 
     <div>
-        <a href="orders.php">
+        <a href="../?controller=commandes">
             Next
         </a>
     </div>
 </main>
 
-<?php include_once "../css/footer.php"; ?>
+<?php include_once "css/footer.php"; ?>
 

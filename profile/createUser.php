@@ -48,4 +48,4 @@ if (($_POST['password']) != ($_POST['password2'])){
 
 createUser($pseudo, $email, $password);
 
-header("Location: /profile/connection.php");
+header("Location: ../?controller=connection");

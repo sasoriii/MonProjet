@@ -1,4 +1,4 @@
-<?php include_once "../css/header.php"; ?>
+<?php include_once "css/header.php"; ?>
 
     <main>
         <h1 class="text-center">
@@ -7,7 +7,7 @@
         <h3 class="text-center">
             Kiteshop of pornichet !
         </h3>
-        <form name="inscription" method="post" action="createOrder.php">
+        <form name="inscription" method="post" action="../panier/createOrder.php">
             Enter your mail :
             <label>
                 <input type="text" name="email"/>
@@ -20,4 +20,4 @@
             <input type="submit" name="valid" value="OK"/>
         </form>
 
-<?= include_once "../css/footer.php" ?>
+<?= include_once "css/footer.php" ?>
